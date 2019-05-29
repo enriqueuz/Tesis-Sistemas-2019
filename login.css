@@ -1,0 +1,21 @@
+html{
+	margin: 0px;
+	padding: 0px;
+}
+
+.login{
+
+	
+	border: 1px solid #CCC;
+	margin: 100px auto;
+	width: 320px
+
+
+
+
+}
+
+input[type="submit"]{
+	
+	margin-top: 10px; 	
+}
