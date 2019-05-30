@@ -1,0 +1,46 @@
+.header {
+  width: 100%;
+ 
+  background-color: white;
+  
+  border-width: 5px;
+  opacity: 0.5;
+}
+
+.logo{
+	margin-top: 5px;
+
+
+}
+
+body, html {
+  height: 100%;
+}
+
+
+.bg {
+  /* The image used */
+  background-image: url("Lecture-Hall.jpg");
+
+  /* Full height */
+  height: 100%;
+
+  /* Center and scale the image nicely */
+  background-position: center;
+  background-repeat: no-repeat;
+  background-size: cover;
+}
+
+.subtitulo{
+	color: white;
+	-webkit-text-stroke: 0.5px grey;
+	opacity: 0.8;
+}
+
+button{
+	background-color: white;
+	opacity: 0.8;
+	
+
+
+}

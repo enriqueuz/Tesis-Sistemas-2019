@@ -1,0 +1,40 @@
+html{
+	margin: 0px;
+	padding: 0px;
+}
+
+.login{
+
+	opacity: 0.8;
+	background-color: white;
+	border: 1px solid #CCC;
+	margin: 50px auto;
+	width: 320px
+
+}
+
+input[type="submit"]{	
+	margin-top: 10px; 	
+}
+
+.bg {
+  /* The image used */
+  background-image: url("Lecture-Hall.jpg");
+
+  /* Full height */
+  height: 100%;
+
+  /* Center and scale the image nicely */
+  background-position: center;
+  background-repeat: no-repeat;
+  background-size: cover;
+}
+
+.header {
+  width: 100%;
+ 
+  background-color: white;
+  
+  border-width: 5px;
+  opacity: 0.5;
+}
