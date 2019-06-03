@@ -131,9 +131,9 @@
 			<div class="btn-group" data-toggle="buttons">
 				<div class="form-check">
 
-					<label for="cons_tr" class="form-check-label">Constancia de trabajo (Si aplica)</label>
-					<input type="radio" name="cons_tr" value="Si">Si
-					<input type="radio" name="cons_tr" value="No">No
+					<label for="constancia_trabajo" class="form-check-label">Constancia de trabajo (Si aplica)</label>
+					<input type="radio" name="constancia_trabajo" value="Si">Si
+					<input type="radio" name="constancia_trabajo" value="No">No
 					
 				</div>	
 
@@ -144,21 +144,21 @@
 				</div>
 
 				<div class="form-check">	
-					<label for="foto_c" class="form-check-label">Fotografía carnet</label>
-					<input type="radio" name="foto_c" value="Si">Si
-					<input type="radio" name="foto_c" value="No">No
+					<label for="foto_carnet" class="form-check-label">Fotografía carnet</label>
+					<input type="radio" name="foto_carnet" value="Si">Si
+					<input type="radio" name="foto_carnet" value="No">No
 				</div>	
 
 				<div class="form-check">
-					<label for="copia_ced" class="form-check-label">Fotocopia de la cédula</label>
-					<input type="radio" name="copia_ced" value="Si">Si
-					<input type="radio" name="copia_ced" value="No">No
+					<label for="copia_cedula" class="form-check-label">Fotocopia de la cédula</label>
+					<input type="radio" name="copia_cedula" value="Si">Si
+					<input type="radio" name="copia_cedula" value="No">No
 				</div>	
 
 				<div class="form-check">	
-					<label for="copia_part" class="form-check-label">Fotocopia de la partida de nacimiento</label>
-					<input type="radio" name="copia_part" value="Si">Si
-					<input type="radio" name="copia_part" value="No">No
+					<label for="copia_partida_nacimiento" class="form-check-label">Fotocopia de la partida de nacimiento</label>
+					<input type="radio" name="copia_partida_nacimiento" value="Si">Si
+					<input type="radio" name="copia_partida_nacimiento" value="No">No
 				</div>	
 
 				<div class="form-check">	
@@ -168,16 +168,16 @@
 				</div>	
 
 				<div class="form-check">	
-					<label for="fondo_n" class="form-check-label">Fondo negro del título</label>
-					<input type="radio" name="fondo_n" value="Si">Si
-					<input type="radio" name="fondo_n" value="No">No
+					<label for="fondo_negro" class="form-check-label">Fondo negro del título</label>
+					<input type="radio" name="fondo_negro" value="Si">Si
+					<input type="radio" name="fondo_negro" value="No">No
 				</div>	
 			</div>	
 		</div>
 
 
 			<div class="form-group" align="center">
-				<button class="btn btn-primary">Registrar estudiante</button>
+				<input type="submit" class="btn btn-primary" value="Registrar estudiante">
 			</div>
 
 
