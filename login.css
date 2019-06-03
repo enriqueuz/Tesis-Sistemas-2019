@@ -19,7 +19,7 @@ input[type="submit"]{
 
 .bg {
   /* The image used */
-  background-image: url("Lecture-Hall.jpg");
+  background-image: url("img/Lecture-Hall.jpg");
 
   /* Full height */
   height: 100%;

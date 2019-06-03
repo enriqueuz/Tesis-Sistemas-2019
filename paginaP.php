@@ -6,7 +6,7 @@
     <meta charset="utf-8">
     <link rel="stylesheet" type="text/css" href="estilopp.css">
     <link rel="stylesheet" type="text/css" href="css/bootstrap.min.css">
-    <link rel="icon" type="image/jpg" href="logo.jpg">
+    <link rel="icon" type="image/jpg" href="img/logo.jpg">
     <script type="text/javascript" src="js/jquery-3.4.1.min.js"></script>
     <script type="text/javascript" src="js/bootstrap.min.js"></script>
     <title>Programa de Profesionalización Docente</title>
@@ -20,7 +20,7 @@
             <span class="border-left-0">
 				<div class="row">
 					<div class="col-lg-3">
-						<img src="educacionula.png" width="180" height="180" class="logo">
+						<img src="img/educacionula.png" width="180" height="180" class="logo">
 					</div>
 
 						<div class="col-lg-9">
@@ -44,10 +44,10 @@
 
         <div class="form-check">
             <nav align="center">
-                <intput type="button" class="btn btn-secondary" onclick="window.location.href='registroEs.html'">Registrar estudiante</intput type="button">
-                <intput type="button" class="btn btn-secondary" onclick="window.location.href='consultaEs.html'">Consultar información de un estudiante</intput type="button">
-                <intput type="button" class="btn btn-secondary" onclick="window.location.href='registroPa.html'">Registrar un pago</intput type="button">
-                <intput type="button" class="btn btn-secondary" onclick="window.location.href='consultaPa.html'">Consultar pagos</intput type="button">
+                <intput type="button" class="btn btn-secondary" onclick="window.location.href='registroEs.php'">Registrar estudiante</intput type="button">
+                <intput type="button" class="btn btn-secondary" onclick="window.location.href='consultaEs.php'">Consultar información de un estudiante</intput type="button">
+                <intput type="button" class="btn btn-secondary" onclick="window.location.href='registroPa.php'">Registrar un pago</intput type="button">
+                <intput type="button" class="btn btn-secondary" onclick="window.location.href='consultaPa.php'">Consultar pagos</intput type="button">
             </nav>
         </div>
     </div>

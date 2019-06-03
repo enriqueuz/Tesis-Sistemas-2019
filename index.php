@@ -5,7 +5,7 @@
     <meta charset="utf-8">
     <link rel="stylesheet" type="text/css" href="css/bootstrap.min.css">
     <link rel="stylesheet" type="text/css" href="login.css">
-    <link rel="icon" type="image/jpg" href="logo.jpg">
+    <link rel="icon" type="image/jpg" href="img/logo.jpg">
     <script type="text/javascript" src="js/jquery-3.4.1.min.js"></script>
     <script type="text/javascript" src="js/bootstrap.min.js"></script>
     <title>Programa de Profesionalización Docente</title>
@@ -18,7 +18,7 @@
             <span class="border-left-0">
 				<div class="row">
 					<div class="col-lg-3">
-						<img src="educacionula.png" width="180" height="180" class="logo">
+						<img src="img/educacionula.png" width="180" height="180" class="logo">
 					</div>
 						<div class="col-lg-9">
 						    <h1 align="center">Programa de Profesionalización Docente de la Universidad de Los Andes</h1> 
