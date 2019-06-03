@@ -4,7 +4,7 @@
 <head>
 
     <meta charset="utf-8">
-    <link rel="stylesheet" type="text/css" href="estilopp.css">
+    <link rel="stylesheet" type="text/css" href="css/estilopp.css">
     <link rel="stylesheet" type="text/css" href="css/bootstrap.min.css">
     <link rel="icon" type="image/jpg" href="img/logo.jpg">
     <script type="text/javascript" src="js/jquery-3.4.1.min.js"></script>
