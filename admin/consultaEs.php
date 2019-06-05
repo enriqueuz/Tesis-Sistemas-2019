@@ -1,3 +1,5 @@
+<?php require('../sesion.php'); ?>
+<?php require('../config.php'); ?>
 <!DOCTYPE html>
 <html>
 
@@ -40,24 +42,69 @@
 
     <h1>Consulte la información de un estudiante</h1>
     <div class="container">
-		<br>
-		<!--TODO: Llenar datos de un estudiante particular. -->
-        <!-- Inicia tabla de consulta-->
-        <table class="table">
-            <thead>
-                <tr>
-                    <th>Cédula</th>
-                    <th>Nombre</th>
-                    <th>Sexo</th>
-                    <th>Correo</th>
-                    <th>Teléfono</th>
-                    <th>Fecha de nacimiento</th>
-                    <th>Título universitario</th>
-                    <th>Mención</th>
-                </tr>
-            </thead>
-            <tbody></tbody>
-        </table>
+		<div class="row mt-5">
+            <!-- Inicia tabla de consulta-->
+            <table class="table">
+                <thead>
+                    <tr>
+                        <th>Cédula</th>
+                        <th>Nombre</th>
+                        <th>Sexo</th>
+                        <th>Correo</th>
+                        <th>Teléfono</th>
+                        <th>Fecha de nacimiento</th>
+                        <th>Título universitario</th>
+                        <th>Mención</th>
+                        <th>Acciones</th>
+                    </tr>
+                </thead>
+                <tbody>
+                <?php
+                    // La consulta comienza acá:
+                    $sql = "SELECT 
+                        `estudiantes`.`id`,
+                        `estudiantes`.`cedula`,
+                        `estudiantes`.`nombre`,
+                        `estudiantes`.`apellido`,
+                        `sexo`,
+                        `telefono`,
+                        `correo`,
+                        `fecha_nacimiento`,
+                        `menciones`.`nombre` AS `mencion_nombre`,
+                        `carreras`.`nombre` AS `carrera_nombre`
+                        FROM `estudiantes`
+                        JOIN `carreras` ON `estudiantes`.`id_carrera`=`carreras`.`id`
+                        JOIN `menciones` ON `carreras`.`id_mencion`=`menciones`.`id`";
+
+                    if($stmt = $pdo->prepare($sql)) {
+                        if($stmt->execute()) {
+                            if($stmt->rowCount() > 0){
+                                while($row = $stmt->fetch()){
+                                    echo '<tr>'.PHP_EOL;
+                                    echo "\t<td>{$row['cedula']}</td>".PHP_EOL;
+                                    echo "\t<td>{$row['nombre']} {$row['apellido']}</td>".PHP_EOL;
+                                    echo "\t<td>". ((strtolower($row["sexo"]) == 'm') ? 'Masculino' : 'Femenino') .'</td>'.PHP_EOL;
+                                    echo "\t<td>{$row['correo']}</td>".PHP_EOL;
+                                    echo "\t<td>{$row['telefono']}</td>".PHP_EOL;
+                                    echo "\t<td>{$row['fecha_nacimiento']}</td>".PHP_EOL;
+                                    echo "\t<td>{$row['mencion_nombre']}</td>".PHP_EOL;
+                                    echo "\t<td>{$row['carrera_nombre']}</td>".PHP_EOL;
+                                    echo "\t<td><a class='btn btn-info' href='verEs.php?id={$row['id']}'>Ver Datos</a></td>".PHP_EOL;
+                                    echo "</tr>".PHP_EOL;
+                                }
+                            } else {
+                                echo '<tr><td colspan="9">No se encontraron registros de estudiantes.</td></tr>'.PHP_EOL;
+                            }
+                        } else {
+                            echo '<tr><td colspan="9">Ocurrió un error al acceder a la base de datos.</td></tr>'.PHP_EOL;
+                        }
+                    }       
+                    unset($stmt);
+                    unset($pdo);
+                    ?>
+                </tbody>
+            </table>
+        </div><!--/.row-->
     </div><!--/.container-->
 </body>
 
