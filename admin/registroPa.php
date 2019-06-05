@@ -1,5 +1,50 @@
 <?php require('../sesion.php'); ?>
 <?php require('../config.php'); ?>
+<?php
+    // Buscar 'menciones' para llenar el select:
+    $sql = "SELECT
+        `estudiantes`.`id`,
+        `estudiantes`.`cedula`,
+        `estudiantes`.`nombre`,
+        `estudiantes`.`apellido`,
+        `sexo`,
+        `telefono`,
+        `correo`,
+        `fecha_nacimiento`,
+        `menciones`.`nombre` AS `mencion_nombre`,
+        `carreras`.`nombre` AS `carrera_nombre`
+        FROM `estudiantes`
+        JOIN `carreras` ON `estudiantes`.`id_carrera`=`carreras`.`id`
+        JOIN `menciones` ON `carreras`.`id_mencion`=`menciones`.`id`
+        ORDER BY `estudiantes`.`cedula`";
+
+    if($stmt = $pdo->prepare($sql)) {      
+        if($stmt->execute()) {
+            if($stmt->rowCount() > 0){
+                $estudiantes = [];
+                while($row = $stmt->fetch()){
+                    $estudiantes[ $row['id'] ] = [
+                        'cedula' => $row['cedula'],
+                        'nombre' => $row['nombre'],
+                        'apellido' => $row['apellido'],
+                        'sexo' => $row['sexo'],
+                        'telefono' => $row['telefono'],
+                        'correo' => $row['correo'],
+                        'fecha_nacimiento' => $row['fecha_nacimiento'],
+                        'mencion_nombre' => $row['mencion_nombre'],
+                        'carrera_nombre' => $row['carrera_nombre'],
+                    ];
+                }
+            } else {
+                $error = 'No se encontraron menciones en la BD.';
+            }
+        } else {
+            $error = 'Algo salió mal. Por favor intente más tarde.';
+        }
+    }
+    unset($stmt);
+    unset($pdo);
+?>
 <!DOCTYPE html>
 <html>
 
@@ -54,6 +99,11 @@
                             <label for="referencia">Estudiante</label>
                             <select id="idEstudiante" name="id_estudiante" class="form-control" required="required">
                                 <option>Seleccione un estudiante...</option>
+                            <?php foreach($estudiantes as $id => $estudiante): ?>
+                                <option value="<?php echo $id; ?>">
+                                    <?php echo "{$estudiante['cedula']} - {$estudiante['nombre']} {$estudiante['apellido']} -  {$estudiante['carrera_nombre']}"; ?>
+                                </option>
+                            <?php endforeach; ?>
                             </select>
                         </div>
                     </div>
