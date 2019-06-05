@@ -43,7 +43,6 @@
     <div class="container">
         <br>
         <!-- Inicia tabla de consulta-->
-		<!--TODO: Llenar datos de pagos hechos por un estudiante particular. -->
         <table class="table">
             <thead class="thead-dark">
                 <tr>
@@ -55,7 +54,43 @@
                     <th>Tipo de pago</th>
                 </tr>
             </thead>
-            <tbody></tbody>
+            <tbody>
+                <?php
+                    // La consulta comienza acá:
+                    $sql = "SELECT 
+                        `pagos`.`id`,
+                        `referencia`,
+                        `monto`,
+                        `fecha`,
+                        `tipo`,
+                        FROM `carreras`
+                        JOIN `estudiantes` ON `carreras`.`id_estudiante`=`estudiantes`.`id`
+                        ORDER BY `fecha`, `carreras`.`id_estudiante`";
+
+                    if($stmt = $pdo->prepare($sql)) {
+                        if($stmt->execute()) {
+                            if($stmt->rowCount() > 0){
+                                while($row = $stmt->fetch()){
+                                    echo '<tr>'.PHP_EOL;
+                                    echo "\t<td>{$row['referencia']}</td>".PHP_EOL;
+                                    echo "\t<td>{$row['monto']}</td>".PHP_EOL;
+                                    echo "\t<td>{$row['fecha']}</td>".PHP_EOL;
+                                    echo "\t<td>{$row['correo']}</td>".PHP_EOL;
+                                    echo "\t<td>{$row['telefono']}</td>".PHP_EOL;
+                                    echo "\t<td>{$row['tipo']}</td>".PHP_EOL;
+                                    echo "</tr>".PHP_EOL;
+                                }
+                            } else {
+                                echo '<tr><td colspan="6">No se encontraron registros de pagos.</td></tr>'.PHP_EOL;
+                            }
+                        } else {
+                            echo '<tr><td colspan="6">Ocurrió un error al acceder a la base de datos.</td></tr>'.PHP_EOL;
+                        }
+                    }       
+                    unset($stmt);
+                    unset($pdo);
+                    ?>
+            </tbody>
         </table>
     </div><!--/.container-->
 </body>
