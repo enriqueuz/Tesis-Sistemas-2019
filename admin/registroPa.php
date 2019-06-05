@@ -1,3 +1,5 @@
+<?php require('../sesion.php'); ?>
+<?php require('../config.php'); ?>
 <!DOCTYPE html>
 <html>
 

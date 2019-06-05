@@ -1,3 +1,5 @@
+<?php require('../sesion.php'); ?>
+<?php require('../config.php'); ?>
 <!DOCTYPE html>
 <html>
 
@@ -102,7 +104,8 @@
                     <div class="row">
                         <div class="col-sm">
                             <label for="mencion">Mención</label>
-                            <select name="mencion" class="form-control"> 
+                            <select name="mencion" class="form-control">
+                                <option>Seleccione una opcion...</option>
                                 <option value="Educación Integral">Educación Integral</option>
                                 <option value="Ciencias Sociales">Ciencias Sociales</option>
                                 <option value="Ciencias Naturales, Matemática y Tecnología">Ciencias Naturales, Matemática y Tecnología</option>
@@ -114,7 +117,7 @@
                         </div>
                         <div class="col-sm">
                             <label for="carrera">Título universitario</label>
-                            <select name="carrera" class="form-control"> 
+                            <select name="carrera" class="form-control">
                                 <option>Seleccione una opcion...</option>
                             </select>
                         </div>
@@ -245,6 +248,9 @@
         </form>
 
     </div>
+    <script>
+    
+    </script>
 
 </body>
 </html>

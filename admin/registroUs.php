@@ -1,30 +1,22 @@
+<?php require('../sesion.php'); ?>
+<?php require('../config.php'); ?>
 <?php
-// Include config file
-require_once('../sesion.php');
-require_once('../config.php');
 
-// Define variables and initialize with empty values
 $usuario = $clave = $confirmar_clave = "";
 $usuario_err = $clave_err = $confirmar_clave_err = "";
  
-// Processing form data when form is submitted
 if($_SERVER["REQUEST_METHOD"] == "POST"){
  
-    // Validate usuario
     if(empty(trim($_POST["usuario"]))){
         $usuario_err = "Por favor introduzca un usuario.";
     } else{
-        // Prepare a select statement
         $sql = "SELECT id FROM usuarios WHERE nombre = :usuario";
         
         if($stmt = $pdo->prepare($sql)){
-            // Bind variables to the prepared statement as parameters
             $stmt->bindParam(":usuario", $param_usuario, PDO::PARAM_STR);
             
-            // Set parameters
             $param_usuario = trim($_POST["usuario"]);
             
-            // Attempt to execute the prepared statement
             if($stmt->execute()){
                 if($stmt->rowCount() == 1){
                     $usuario_err = 'Este nombre de usuario ya existe.';
@@ -36,58 +28,47 @@ if($_SERVER["REQUEST_METHOD"] == "POST"){
             }
         }
          
-        // Close statement
         unset($stmt);
     }
     
-    // Validate clave
-    if(empty(trim($_POST["clave"]))){
+    if(empty(trim($_POST["clave"]))) {
         $clave_err = "Por favor introduzca la contraseña";
-    } elseif(strlen(trim($_POST["clave"])) < 6){
+    } elseif(strlen(trim($_POST["clave"])) < 6) {
         $clave_err = "La contraseña debe tener al menos 6 caracteres.";
-    } else{
+    } else {
         $clave = trim($_POST["clave"]);
     }
-    
-    // Validate confirm clave
-    if(empty(trim($_POST["confirmar_clave"]))){
+
+    if(empty(trim($_POST["confirmar_clave"]))) {
         $confirmar_clave_err = "Por favor confirme la contraseña.";     
-    } else{
+    } else {
         $confirmar_clave = trim($_POST["confirmar_clave"]);
         if(empty($clave_err) && ($clave != $confirmar_clave)){
             $confirmar_clave_err = "La confirmación de contraseña no coincide.";
         }
     }
-    
-    // Check input errors before inserting in database
-    if(empty($usuario_err) && empty($clave_err) && empty($confirmar_clave_err)){
+
+    if(empty($usuario_err) && empty($clave_err) && empty($confirmar_clave_err)) {
         
-        // Prepare an insert statement
         $sql = "INSERT INTO usuarios (nombre, clave) VALUES (:usuario, :clave)";
          
-        if($stmt = $pdo->prepare($sql)){
-            // Bind variables to the prepared statement as parameters
+        if($stmt = $pdo->prepare($sql)) {
             $stmt->bindParam(":usuario", $param_usuario, PDO::PARAM_STR);
             $stmt->bindParam(":clave", $param_clave, PDO::PARAM_STR);
             
-            // Set parameters
             $param_usuario = $usuario;
             $param_clave = password_hash($clave, PASSWORD_DEFAULT); // Creates a clave hash
             
-            // Attempt to execute the prepared statement
             if($stmt->execute()){
-                // Redirect to login page
                 header("location: ../index.php");
             } else{
                 echo "Algo salió mal. Por favor intente más tarde.";
             }
         }
          
-        // Close statement
         unset($stmt);
     }
     
-    // Close connection
     unset($pdo);
 }
 ?>
