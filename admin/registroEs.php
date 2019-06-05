@@ -1,5 +1,26 @@
 <?php require('../sesion.php'); ?>
 <?php require('../config.php'); ?>
+<?php
+    // Buscar 'menciones' para llenar el select:
+    $sql = "SELECT * from `menciones`";
+
+    if($stmt = $pdo->prepare($sql)) {      
+        if($stmt->execute()) {
+            if($stmt->rowCount() > 0){
+                $menciones = [];
+                while($row = $stmt->fetch()){
+                    $menciones[ $row['id'] ] = $row['nombre'];
+                }
+            } else {
+                $error = 'No se encontraron menciones en la BD.';
+            }
+        } else {
+            $error = 'Algo salió mal. Por favor intente más tarde.';
+        }
+    }
+    unset($stmt);
+    unset($pdo);
+?>
 <!DOCTYPE html>
 <html>
 
@@ -106,13 +127,9 @@
                             <label for="mencion">Mención</label>
                             <select name="mencion" class="form-control">
                                 <option>Seleccione una opcion...</option>
-                                <option value="Educación Integral">Educación Integral</option>
-                                <option value="Ciencias Sociales">Ciencias Sociales</option>
-                                <option value="Ciencias Naturales, Matemática y Tecnología">Ciencias Naturales, Matemática y Tecnología</option>
-                                <option value="Lenguaje, Cultura e Idiomas">Lenguaje, Cultura e Idiomas</option>
-                                <option value="Ecología y Educación Ambiental">Ecología y Educación Ambiental</option>
-                                <option value="Educación para el Trabajo y Desarrollo Endógeno">Educación para el Trabajo y Desarrollo Endógeno</option>
-                                <option value="Ciencias de Salud">Ciencias de Salud</option>
+                            <?php foreach($menciones as $id => $nombre): ?>
+                                <option value="<?php echo $id; ?>"><?php echo $nombre; ?></option>
+                            <?php endforeach; ?>
                             </select>
                         </div>
                         <div class="col-sm">
@@ -251,6 +268,5 @@
     <script>
     
     </script>
-
 </body>
 </html>
