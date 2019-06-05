@@ -1,3 +1,4 @@
+<?php require_once('sesion.php'); ?>
 <!DOCTYPE html>
 <html>
 
@@ -44,10 +45,11 @@
 
         <div class="form-check">
             <nav align="center">
-                <intput type="button" class="btn btn-secondary" onclick="window.location.href='registroEs.php'">Registrar estudiante</intput type="button">
-                <intput type="button" class="btn btn-secondary" onclick="window.location.href='consultaEs.php'">Consultar información de un estudiante</intput type="button">
-                <intput type="button" class="btn btn-secondary" onclick="window.location.href='registroPa.php'">Registrar un pago</intput type="button">
-                <intput type="button" class="btn btn-secondary" onclick="window.location.href='consultaPa.php'">Consultar pagos</intput type="button">
+                <button class="btn btn-secondary" onclick="window.location.href='registroEs.php'">Registrar estudiante</button>
+                <button class="btn btn-secondary" onclick="window.location.href='consultaEs.php'">Consultar información de un estudiante</button>
+                <button class="btn btn-secondary" onclick="window.location.href='registroPa.php'">Registrar un pago</button>
+                <button class="btn btn-secondary" onclick="window.location.href='consultaPa.php'">Consultar pagos</button>
+                <button class="btn btn-secondary" onclick="window.location.href='salir.php'">Salir del sistema</button>
             </nav>
         </div>
     </div>
