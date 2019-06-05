@@ -1,5 +1,4 @@
 <?php
-// Include config file
 require_once('../sesion.php');
 require_once('../config.php');
  
@@ -63,15 +62,12 @@ if($_SERVER["REQUEST_METHOD"] == "POST") {
         $error_query[] = 'err_id_carrera=1';
     }
 
-    // Check input errors before inserting in database
     if(empty($error_msgs)) {
 
-        // Prepare an insert statement
         $sql = "INSERT INTO estudiantes (id_carrera, cedula, nombre, apellido, sexo, telefono, correo, fecha_nacimiento)
         VALUES (:id_carrera, :cedula, :nombre, :apellido, :sexo, :telefono, :correo, :fecha_nacimiento)";
 
         if($stmt_insert_1 = $pdo->prepare($sql)){
-            // Bind variables to the prepared statement as parameters
             $stmt_insert_1->bindParam(":id_carrera", $param_id_carrera, PDO::PARAM_INT);
             $stmt_insert_1->bindParam(":cedula", $param_cedula, PDO::PARAM_STR);
             $stmt_insert_1->bindParam(":nombre", $param_nombre, PDO::PARAM_STR);
@@ -81,7 +77,6 @@ if($_SERVER["REQUEST_METHOD"] == "POST") {
             $stmt_insert_1->bindParam(":correo", $param_correo, PDO::PARAM_STR);
             $stmt_insert_1->bindParam(":fecha_nacimiento", $param_fecha_nacimiento, PDO::PARAM_STR);
 
-            // Set parameters
             $param_id_carrera       = $carrera;
             $param_cedula           = $cedula;
             $param_nombre           = $nombre;
@@ -92,7 +87,6 @@ if($_SERVER["REQUEST_METHOD"] == "POST") {
             $param_fecha_nacimiento = $fecha_nacimiento;
 
             if($stmt_insert_1->execute()) {
-                // Retrieve the inserted object:
                 $id_estudiante = $pdo->lastInsertId();
 
                 // TODO: Esto maneja radio buttons tal como está. Se puede modificar para manejar checkboxes.
@@ -139,7 +133,6 @@ if($_SERVER["REQUEST_METHOD"] == "POST") {
                     $fondo_negro = false;
                 }
 
-                // Prepare an insert statement
                 $sql2 = "INSERT INTO documentos_estudiantes (id_estudiante, constancia_trabajo, curriculum, foto_carnet, copia_cedula, copia_partida_nacimiento, notas, fondo_negro)
                         VALUES (:id_estudiante, :constancia_trabajo, :curriculum, :foto_carnet, :copia_cedula, :copia_partida_nacimiento, :notas, :fondo_negro)";
                 
@@ -164,27 +157,23 @@ if($_SERVER["REQUEST_METHOD"] == "POST") {
                     $param_fondo_negro = $fondo_negro;
 
                     if($stmt_insert_2->execute()) {
-                        // Redirect to login page
                         header("location: registroEs.php?exito=1");
                     } else {
                         echo "Algo salió mal. Por favor intente más tarde.";
                     }
                 }
 
-                // Close statement
                 unset($stmt_insert_2);
             } else {
                 echo "Algo salió mal. Por favor intente más tarde.";
             }
         }
 
-        // Close statement
         unset($stmt_insert_1);
     } else {
         header("location: registroEs.php?" .implode('&', $error_query));
     }
 
-    // Close connection
     unset($pdo);
 }
 ?>
