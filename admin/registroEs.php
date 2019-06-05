@@ -36,7 +36,7 @@
         </nav>
     </header>
 
-<!-- Inicia formulario de registro-->
+    <!-- Inicia formulario de registro-->
 
     <h1>Registre un estudiante</h1>
 
@@ -60,7 +60,6 @@
                 </div>
                 <br>
 
-
                 <div class="form-group">
                     <div class="row">
                         <div class="col-sm">
@@ -76,10 +75,10 @@
                         <div class="col-sm" align="center">
                             <label for="sexo" class="form-check-label">Sexo</label><br><br>
                             <div class="form-check form-check-inline">
-                                <input type="radio" name="sexo" value="masculino"> Masculino
+                                <input type="radio" name="sexo" value="m"> Masculino
                             </div>
                             <div class="form-check form-check-inline">
-                                <input type="radio" name="sexo" value="femenino"> Femenino
+                                <input type="radio" name="sexo" value="f"> Femenino
                             </div>	
                         </div>
 
@@ -93,7 +92,7 @@
                             <input type="email" name="correo" class="form-control">
                         </div>
                         <div class="col-sm">
-                            <label for="fecha_n">Fecha de nacimiento</label>
+                            <label for="fecha_nacimiento">Fecha de nacimiento</label>
                             <input type="date" name="fecha_nacimiento" class="form-control">
                         </div>	
                     </div>
@@ -101,10 +100,6 @@
 
                 <div class="form-group">
                     <div class="row">
-                        <div class="col-sm">
-                            <label for="titulo">Título universitario</label>
-                            <input type="text" name="titulo" class="form-control">
-                        </div>
                         <div class="col-sm">
                             <label for="mencion">Mención</label>
                             <select name="mencion" class="form-control"> 
@@ -116,21 +111,24 @@
                                 <option value="Educación para el Trabajo y Desarrollo Endógeno">Educación para el Trabajo y Desarrollo Endógeno</option>
                                 <option value="Ciencias de Salud">Ciencias de Salud</option>
                             </select>
-                        </div>	
+                        </div>
+                        <div class="col-sm">
+                            <label for="carrera">Título universitario</label>
+                            <select name="carrera" class="form-control"> 
+                                <option>Seleccione una opcion...</option>
+                            </select>
+                        </div>
                     </div>	
                 </div>		
 
-            </div>	
-
+            </div>
 
             <h2>Documentos Consignados</h2>
             <div class="btn-group" data-toggle="buttons">
                 <div class="form-check">
-
                     <label for="constancia_trabajo" class="form-check-label">Constancia de trabajo (Si aplica)</label>
                     <input type="radio" name="constancia_trabajo" value="Si">Si
                     <input type="radio" name="constancia_trabajo" value="No">No
-                    
                 </div>	
 
                 <div class="form-check">
@@ -168,16 +166,11 @@
                     <input type="radio" name="fondo_negro" value="Si">Si
                     <input type="radio" name="fondo_negro" value="No">No
                 </div>	
-            </div>	
-        </div>
-
+            </div>
 
             <div class="form-group" align="center">
                 <input type="submit" class="btn btn-primary" value="Registrar estudiante">
             </div>
-
-
-
 
         </form>
 

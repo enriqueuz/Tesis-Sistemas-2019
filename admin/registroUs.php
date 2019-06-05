@@ -72,7 +72,7 @@ if($_SERVER["REQUEST_METHOD"] == "POST"){
             
             // Set parameters
             $param_usuario = $usuario;
-            $param_clave = clave_hash($clave, clave_DEFAULT); // Creates a clave hash
+            $param_clave = password_hash($clave, PASSWORD_DEFAULT); // Creates a clave hash
             
             // Attempt to execute the prepared statement
             if($stmt->execute()){
