@@ -36,7 +36,7 @@
         </nav>
     </header>
 
-<!-- Inicia formulario de registro-->
+    <!-- Inicia formulario de registro-->
 
     <h1>Registre un estudiante</h1>
 
@@ -60,7 +60,6 @@
                 </div>
                 <br>
 
-
                 <div class="form-group">
                     <div class="row">
                         <div class="col-sm">
@@ -76,10 +75,10 @@
                         <div class="col-sm" align="center">
                             <label for="sexo" class="form-check-label">Sexo</label><br><br>
                             <div class="form-check form-check-inline">
-                                <input type="radio" name="sexo" value="masculino"> Masculino
+                                <input type="radio" name="sexo" value="m"> Masculino
                             </div>
                             <div class="form-check form-check-inline">
-                                <input type="radio" name="sexo" value="femenino"> Femenino
+                                <input type="radio" name="sexo" value="f"> Femenino
                             </div>	
                         </div>
 
@@ -93,7 +92,7 @@
                             <input type="email" name="correo" class="form-control">
                         </div>
                         <div class="col-sm">
-                            <label for="fecha_n">Fecha de nacimiento</label>
+                            <label for="fecha_nacimiento">Fecha de nacimiento</label>
                             <input type="date" name="fecha_nacimiento" class="form-control">
                         </div>	
                     </div>
@@ -101,10 +100,6 @@
 
                 <div class="form-group">
                     <div class="row">
-                        <div class="col-sm">
-                            <label for="titulo">Título universitario</label>
-                            <input type="text" name="titulo" class="form-control">
-                        </div>
                         <div class="col-sm">
                             <label for="mencion">Mención</label>
                             <select name="mencion" class="form-control"> 
@@ -116,68 +111,136 @@
                                 <option value="Educación para el Trabajo y Desarrollo Endógeno">Educación para el Trabajo y Desarrollo Endógeno</option>
                                 <option value="Ciencias de Salud">Ciencias de Salud</option>
                             </select>
-                        </div>	
+                        </div>
+                        <div class="col-sm">
+                            <label for="carrera">Título universitario</label>
+                            <select name="carrera" class="form-control"> 
+                                <option>Seleccione una opcion...</option>
+                            </select>
+                        </div>
                     </div>	
                 </div>		
 
-            </div>	
-
+            </div>
 
             <h2>Documentos Consignados</h2>
-            <div class="btn-group" data-toggle="buttons">
-                <div class="form-check">
-
+            <div class="row">
+                <div class="col">
                     <label for="constancia_trabajo" class="form-check-label">Constancia de trabajo (Si aplica)</label>
-                    <input type="radio" name="constancia_trabajo" value="Si">Si
-                    <input type="radio" name="constancia_trabajo" value="No">No
-                    
-                </div>	
-
-                <div class="form-check">
-                    <label for="curriculum" class="form-check-label">Currículum</label>	
-                    <input type="radio" name="curriculum" value="Si">Si				
-                    <input type="radio" name="curriculum" value="No">No	
+                    <div class="form-check">
+                        <div class="form-check form-check-inline">
+                            <label class="form-check-label">
+                                <input type="radio" class="form-check-input" name="constancia_trabajo" value="Si">Sí
+                            </label>
+                        </div>
+                        <div class="form-check form-check-inline">
+                            <label class="form-check-label">
+                                <input type="radio" class="form-check-input" name="constancia_trabajo" value="No">No
+                            </label>
+                        </div>
+                    </div>
                 </div>
 
-                <div class="form-check">	
+                <div class="col">
+                    <label for="curriculum" class="form-check-label">Currículum</label>
+                    <div class="form-check">
+                        <div class="form-check form-check-inline">
+                            <label class="form-check-label">
+                                <input type="radio" class="form-check-input" name="curriculum" value="Si">Sí
+                            </label>
+                        </div>
+                        <div class="form-check form-check-inline">
+                            <label class="form-check-label">
+                                <input type="radio" class="form-check-input" name="curriculum" value="No">No
+                            </label>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="col">
                     <label for="foto_carnet" class="form-check-label">Fotografía carnet</label>
-                    <input type="radio" name="foto_carnet" value="Si">Si
-                    <input type="radio" name="foto_carnet" value="No">No
-                </div>	
+                    <div class="form-check">
+                        <div class="form-check form-check-inline">
+                            <label class="form-check-label">
+                                <input type="radio" class="form-check-input" name="foto_carnet" value="Si">Sí
+                            </label>
+                        </div>
+                        <div class="form-check form-check-inline">
+                            <label class="form-check-label">
+                                <input type="radio" class="form-check-input" name="foto_carnet" value="No">No
+                            </label>
+                        </div>
+                    </div>
+                </div>
 
-                <div class="form-check">
+                <div class="col">
                     <label for="copia_cedula" class="form-check-label">Fotocopia de la cédula</label>
-                    <input type="radio" name="copia_cedula" value="Si">Si
-                    <input type="radio" name="copia_cedula" value="No">No
-                </div>	
+                    <div class="form-check">
+                        <div class="form-check form-check-inline">
+                            <label class="form-check-label">
+                                <input type="radio" class="form-check-input" name="copia_cedula" value="Si">Sí
+                            </label>
+                        </div>
+                        <div class="form-check form-check-inline">
+                            <label class="form-check-label">
+                                <input type="radio" class="form-check-input" name="copia_cedula" value="No">No
+                            </label>
+                        </div>
+                    </div>
+                </div>
 
-                <div class="form-check">	
+                <div class="col">
                     <label for="copia_partida_nacimiento" class="form-check-label">Fotocopia de la partida de nacimiento</label>
-                    <input type="radio" name="copia_partida_nacimiento" value="Si">Si
-                    <input type="radio" name="copia_partida_nacimiento" value="No">No
-                </div>	
+                    <div class="form-check">
+                        <div class="form-check form-check-inline">
+                            <label class="form-check-label">
+                                <input type="radio" class="form-check-input" name="copia_partida_nacimiento" value="Si">Sí
+                            </label>
+                        </div>
+                        <div class="form-check form-check-inline">
+                            <label class="form-check-label">
+                                <input type="radio" class="form-check-input" name="copia_partida_nacimiento" value="No">No
+                            </label>
+                        </div>
+                    </div>
+                </div>
 
-                <div class="form-check">	
+                <div class="col">
                     <label for="notas" class="form-check-label">Fotocopia de las notas certificadas</label>
-                    <input type="radio" name="notas" value="Si">Si
-                    <input type="radio" name="notas" value="No">No		
-                </div>	
+                    <div class="form-check">
+                        <div class="form-check form-check-inline">
+                            <label class="form-check-label">
+                                <input type="radio" class="form-check-input" name="notas" value="Si">Sí
+                            </label>
+                        </div>
+                        <div class="form-check form-check-inline">
+                            <label class="form-check-label">
+                                <input type="radio" class="form-check-input" name="notas" value="No">No
+                            </label>
+                        </div>
+                    </div>
+                </div>
 
-                <div class="form-check">	
+                <div class="col">
                     <label for="fondo_negro" class="form-check-label">Fondo negro del título</label>
-                    <input type="radio" name="fondo_negro" value="Si">Si
-                    <input type="radio" name="fondo_negro" value="No">No
-                </div>	
-            </div>	
-        </div>
-
+                    <div class="form-check">
+                        <div class="form-check form-check-inline">
+                            <label class="form-check-label">
+                                <input type="radio" class="form-check-input" name="fondo_negro" value="Si">Sí
+                            </label>
+                        </div>
+                        <div class="form-check form-check-inline">
+                            <label class="form-check-label">
+                                <input type="radio" class="form-check-input" name="fondo_negro" value="No">No
+                            </label>
+                        </div>
+                    </div>
+                </div>
+            </div>
 
             <div class="form-group" align="center">
                 <input type="submit" class="btn btn-primary" value="Registrar estudiante">
             </div>
-
-
-
 
         </form>
 
