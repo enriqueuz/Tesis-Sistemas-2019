@@ -4,7 +4,7 @@
 <html>
 
 <head>
-    <title>Registre un estudiante</title>
+    <title>Consultar pagos</title>
     <meta charset="utf-8">
     <link rel="icon" type="image/jpg" href="../img/logo.jpg">
     <script type="text/javascript" src="../js/jquery-3.4.1.min.js"></script>

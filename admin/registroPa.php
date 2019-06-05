@@ -74,18 +74,19 @@
                 <div class="form-group">
                     <div class="row">
                         <div class="col-sm">
-                            <label for="fecha_p">Fecha de pago</label>
+                            <label for="fecha_pago">Fecha de pago</label>
                             <input type="date" name="fecha_pago" class="form-control">
                         </div>
 
                         <div class="col-sm">
                             <label for="tipo_pago">Tipo de pago</label>
                             <select id="tipo_pago" name="tipo_pago" class="form-control">
-                                <option value="Inscripción">Inscripción</option>
-                                <option value="Primer trimestre">Primer trimestre</option>
-                                <option value="Segundo trimestre">Segundo trimestre</option>
-                                <option value="Cuarto trimestre">Cuarto trimestre</option>
-                                <option value="Memoria de grado">Memoria de grado</option>
+                                <option value="inscripcion">Inscripción</option>
+                                <option value="t1">Primer trimestre</option>
+                                <option value="t2">Segundo trimestre</option>
+                                <option value="t3">Tercer trimestre</option>
+                                <option value="t4">Cuarto trimestre</option>
+                                <option value="mg">Memoria de grado</option>
                             </select>
                         </div>
                     </div>
