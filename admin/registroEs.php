@@ -125,7 +125,7 @@
                     <div class="row">
                         <div class="col-sm">
                             <label for="mencion">Mención</label>
-                            <select name="mencion" class="form-control">
+                            <select name="mencion" class="form-control select-mencion">
                                 <option>Seleccione una opcion...</option>
                             <?php foreach($menciones as $id => $nombre): ?>
                                 <option value="<?php echo $id; ?>"><?php echo $nombre; ?></option>
@@ -134,7 +134,7 @@
                         </div>
                         <div class="col-sm">
                             <label for="carrera">Título universitario</label>
-                            <select name="carrera" class="form-control">
+                            <select name="carrera" class="form-control select-carrera">
                                 <option>Seleccione una opcion...</option>
                             </select>
                         </div>
@@ -266,7 +266,29 @@
 
     </div>
     <script>
-    
+        $('.select-mencion').on('change', function(event){
+            var mencion = $(this).children("option:selected").val();
+            $.post( "listarCarreras.php", { id_mencion: mencion })
+                .done(function( result ) {
+                    data = $.parseJSON(result);
+                    if(data) {
+                        $('.select-carrera option').remove();
+                        $('.select-carrera').append($('<option>', { 
+                            value: undefined,
+                            text : 'Seleccione una opcion...'
+                        }));
+                        $.each(data.result, function (i, item) {
+                            console.log('i, item:', i, item);
+                            console.log('item.id:',item.id);
+                            console.log('item.nombre:', item.nombre);
+                            $('.select-carrera').append($('<option>', { 
+                                value: item.id,
+                                text : item.nombre 
+                            }));
+                        });
+                    }
+                });
+        });
     </script>
 </body>
 </html>
