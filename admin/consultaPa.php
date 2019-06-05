@@ -1,3 +1,5 @@
+<?php require('../sesion.php'); ?>
+<?php require('../config.php'); ?>
 <!DOCTYPE html>
 <html>
 
@@ -62,10 +64,10 @@
                         `referencia`,
                         `monto`,
                         `fecha`,
-                        `tipo`,
-                        FROM `carreras`
-                        JOIN `estudiantes` ON `carreras`.`id_estudiante`=`estudiantes`.`id`
-                        ORDER BY `fecha`, `carreras`.`id_estudiante`";
+                        `tipo`
+                        FROM `pagos`
+                        JOIN `estudiantes` ON `pagos`.`id_estudiante`=`estudiantes`.`id`
+                        ORDER BY `fecha`, `pagos`.`id_estudiante`";
 
                     if($stmt = $pdo->prepare($sql)) {
                         if($stmt->execute()) {
