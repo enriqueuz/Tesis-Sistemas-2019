@@ -41,8 +41,6 @@
         }
         unset($stmt);
         unset($pdo);
-    } else {
-
     }
 ?>
 <!DOCTYPE html>
@@ -89,8 +87,8 @@
 
     <br>
     <div class="container py-5">
-        <br> 
-        <form action="editarEs.php?id=<?php echo $estudiante['id']; ?>" method="POST" name="fe" class="form-horizontal"> 
+        <br>
+        <div class="form-horizontal"> 
 
             <div class="form-group">
                 <h2>Datos personales</h2>
@@ -280,10 +278,10 @@
             </div>
 
             <div class="form-group" align="center">
-                <button class="btn btn-primary" onclick="window.location.href='editarEs.php?id=<?php echo $estudiante["id"]; ?>'">Editar estudiante</button>
+                <button class="btn btn-primary" onclick="window.location.href='editarEs.php?editar=1&id=<?php echo $estudiante["id"]; ?>'">Editar estudiante</button>
             </div>
 
-        </form>
+        </div>
 
     </div>
     <script>
