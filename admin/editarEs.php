@@ -1,32 +1,56 @@
 <?php require('../sesion.php'); ?>
 <?php require('../config.php'); ?>
 <?php
-    //TODO: Completar esto.
-    // Buscar 'menciones' para llenar el select:
-    $sql = "SELECT * from `menciones`";
+    // Al cargar inicialmente la página de edición
+    if( isset($_GET['id']) && !empty($_GET['id']) ) {
+        $sql = "SELECT
+                `estudiantes`.*,
+                `carreras`.`id` AS `id_carrera`,
+                `carreras`.`nombre` AS `carrera_nombre`,
+                `menciones`.`id` AS `id_mencion`,
+                `menciones`.`nombre` AS `mencion_nombre`,
+                `documentos_estudiantes`.`constancia_trabajo`,
+                `documentos_estudiantes`.`curriculum`,
+                `documentos_estudiantes`.`foto_carnet`,
+                `documentos_estudiantes`.`copia_cedula`,
+                `documentos_estudiantes`.`copia_partida_nacimiento`,
+                `documentos_estudiantes`.`notas`,
+                `documentos_estudiantes`.`fondo_negro`
+            FROM `estudiantes`
+            JOIN `carreras` ON `estudiantes`.`id_carrera`=`carreras`.`id`
+            JOIN `menciones` ON `carreras`.`id_mencion`=`menciones`.`id`
+            JOIN `documentos_estudiantes` ON `estudiantes`.`id`=`documentos_estudiantes`.`id_estudiante`
+            WHERE `estudiantes`.`id`=:id_estudiante
+            LIMIT 1";
 
-    if($stmt = $pdo->prepare($sql)) {      
-        if($stmt->execute()) {
-            if($stmt->rowCount() > 0){
-                $menciones = [];
-                while($row = $stmt->fetch()){
-                    $menciones[ $row['id'] ] = $row['nombre'];
+        $estudiante = null;
+        if($stmt = $pdo->prepare($sql)) {
+            $stmt->bindParam(":id_estudiante", $param_usuario, PDO::PARAM_STR);
+            $param_usuario = $_GET['id'];
+
+            if($stmt->execute()) {
+                if($stmt->rowCount() > 0){
+                    while($row = $stmt->fetch()){
+                        $estudiante = $row;
+                    }
+                } else {
+                    $error = 'No se encontró un estudiante con ese ID en la BD.';
                 }
             } else {
-                $error = 'No se encontraron menciones en la BD.';
+                $error = 'Algo salió mal. Por favor intente más tarde.';
             }
-        } else {
-            $error = 'Algo salió mal. Por favor intente más tarde.';
         }
+        unset($stmt);
+        unset($pdo);
+    } else {
+        die("no se encontro ID");
     }
-    unset($stmt);
-    unset($pdo);
 ?>
 <!DOCTYPE html>
 <html>
 
 <head>
-    <title>Registre un estudiante</title>
+    <title>Modificar un estudiante</title>
     <meta charset="utf-8">
     <link rel="icon" type="image/jpg" href="../img/logo.jpg">
     <script type="text/javascript" src="../js/jquery-3.4.1.min.js"></script>
@@ -45,10 +69,10 @@
 
             <div class="collapse navbar-collapse" id="navbarSupportedContent">
                 <ul class="navbar-nav mr-auto">
-                      <li class="nav-item"><a class="nav-link disabled text-light" href="../registroEs.php">Registre un estudiante</a></li>
-                       <li class="nav-item"><a class="nav-link text-light" href="../consultaEs.php">Consulte la información de un estudiante</a></li>
-                       <li class="nav-item"><a class="nav-link text-light" href="../registroPa.php">Registre un pago</a></li>
-                       <li class="nav-item"><a class="nav-link text-light" href="../consultaPa.php">Consulte un pago</a></li>
+                    <li class="nav-item"><a class="nav-link text-light" href="../registroEs.php">Registre un estudiante</a></li>
+                    <li class="nav-item"><a class="nav-link text-light" href="../consultaEs.php">Consulte la información de un estudiante</a></li>
+                    <li class="nav-item"><a class="nav-link text-light" href="../registroPa.php">Registre un pago</a></li>
+                    <li class="nav-item"><a class="nav-link text-light" href="../consultaPa.php">Consulte un pago</a></li>
                 </ul>
             <!--
                 <form class="form-inline my-2 my-lg-0">
@@ -60,9 +84,9 @@
         </nav>
     </header>
 
-    <!-- Inicia formulario de registro-->
+    <!-- Inicia formulario de edición-->
 
-    <h1>Registre un estudiante</h1>
+    <h1>Datos del estudiante</h1>
 
     <br>
     <div class="container py-5">
@@ -74,12 +98,12 @@
                 <div class="row">
                     <div class="col-sm">					
                         <label for="nombre">Nombre</label>
-                        <input type="text" name="nombre" class="form-control">
+                        <input type="text" name="nombre" class="form-control" value="<?php echo $estudiante['nombre']; ?>">
                     </div>
 
                     <div class="col-sm">					
                         <label for="apellido">Apellido</label>
-                        <input type="text" name="apellido" class="form-control">
+                        <input type="text" name="apellido" class="form-control" value="<?php echo $estudiante['apellido']; ?>">
                     </div>
                 </div>
                 <br>
@@ -88,21 +112,21 @@
                     <div class="row">
                         <div class="col-sm">
                             <label for="cedula">Cédula de identidad</label>
-                            <input type="number" name="cedula" class="form-control">
+                            <input type="number" name="cedula" class="form-control" value="<?php echo $estudiante['cedula']; ?>">
                         </div>	
                         
                         <div class="col-sm">
                             <label for="telefono">Número de teléfono</label>
-                            <input type="tel" name="telefono" class="form-control">
+                            <input type="tel" name="telefono" class="form-control" value="<?php echo $estudiante['telefono']; ?>">
                         </div>
 
                         <div class="col-sm" align="center">
                             <label for="sexo" class="form-check-label">Sexo</label><br><br>
                             <div class="form-check form-check-inline">
-                                <input type="radio" name="sexo" value="m"> Masculino
+                                <input type="radio" name="sexo" value="m" <?php echo (strtolower($estudiante['sexo']) == 'm') ? 'checked="checked"' : ''; ?>> Masculino
                             </div>
                             <div class="form-check form-check-inline">
-                                <input type="radio" name="sexo" value="f"> Femenino
+                                <input type="radio" name="sexo" value="f" <?php echo (strtolower($estudiante['sexo']) == 'f') ? 'checked="checked"' : ''; ?>> Femenino
                             </div>	
                         </div>
 
@@ -113,11 +137,11 @@
                     <div class="row">
                         <div class="col-sm">	
                             <label for="correo">Correo electrónico</label>
-                            <input type="email" name="correo" class="form-control">
+                            <input type="email" name="correo" class="form-control" value="<?php echo $estudiante['correo']; ?>">
                         </div>
                         <div class="col-sm">
                             <label for="fecha_nacimiento">Fecha de nacimiento</label>
-                            <input type="date" name="fecha_nacimiento" class="form-control">
+                            <input type="date" name="fecha_nacimiento" class="form-control" value="<?php echo $estudiante['fecha_nacimiento']; ?>">
                         </div>	
                     </div>
                 </div>			
@@ -127,16 +151,13 @@
                         <div class="col-sm">
                             <label for="mencion">Mención</label>
                             <select name="mencion" class="form-control select-mencion">
-                                <option>Seleccione una opcion...</option>
-                            <?php foreach($menciones as $id => $nombre): ?>
-                                <option value="<?php echo $id; ?>"><?php echo $nombre; ?></option>
-                            <?php endforeach; ?>
+                                <option value="<?php echo $estudiante['id_mencion']; ?>"><?php echo $estudiante['mencion_nombre']; ?></option>
                             </select>
                         </div>
                         <div class="col-sm">
                             <label for="carrera">Título universitario</label>
                             <select name="carrera" class="form-control select-carrera">
-                                <option>Seleccione una opcion...</option>
+                                <option value="<?php echo $estudiante['id_carrera']; ?>"><?php echo $estudiante['carrera_nombre']; ?></option>
                             </select>
                         </div>
                     </div>	
@@ -151,12 +172,12 @@
                     <div class="form-check">
                         <div class="form-check form-check-inline">
                             <label class="form-check-label">
-                                <input type="radio" class="form-check-input" name="constancia_trabajo" value="Si">Sí
+                                <input type="radio" class="form-check-input" name="constancia_trabajo" value="Si" <?php echo ($estudiante['constancia_trabajo'] == 1) ? 'checked="checked"' : ''; ?>>Sí
                             </label>
                         </div>
                         <div class="form-check form-check-inline">
                             <label class="form-check-label">
-                                <input type="radio" class="form-check-input" name="constancia_trabajo" value="No">No
+                                <input type="radio" class="form-check-input" name="constancia_trabajo" value="No" <?php echo ($estudiante['constancia_trabajo'] == 0) ? 'checked="checked"' : ''; ?>>No
                             </label>
                         </div>
                     </div>
@@ -167,12 +188,12 @@
                     <div class="form-check">
                         <div class="form-check form-check-inline">
                             <label class="form-check-label">
-                                <input type="radio" class="form-check-input" name="curriculum" value="Si">Sí
+                                <input type="radio" class="form-check-input" name="curriculum" value="Si" <?php echo ($estudiante['curriculum'] == 1) ? 'checked="checked"' : ''; ?>>Sí
                             </label>
                         </div>
                         <div class="form-check form-check-inline">
                             <label class="form-check-label">
-                                <input type="radio" class="form-check-input" name="curriculum" value="No">No
+                                <input type="radio" class="form-check-input" name="curriculum" value="No" <?php echo ($estudiante['curriculum'] == 0) ? 'checked="checked"' : ''; ?>>No
                             </label>
                         </div>
                     </div>
@@ -183,12 +204,12 @@
                     <div class="form-check">
                         <div class="form-check form-check-inline">
                             <label class="form-check-label">
-                                <input type="radio" class="form-check-input" name="foto_carnet" value="Si">Sí
+                                <input type="radio" class="form-check-input" name="foto_carnet" value="Si" <?php echo ($estudiante['foto_carnet'] == 1) ? 'checked="checked"' : ''; ?>>Sí
                             </label>
                         </div>
                         <div class="form-check form-check-inline">
                             <label class="form-check-label">
-                                <input type="radio" class="form-check-input" name="foto_carnet" value="No">No
+                                <input type="radio" class="form-check-input" name="foto_carnet" value="No" <?php echo ($estudiante['foto_carnet'] == 0) ? 'checked="checked"' : ''; ?>>No
                             </label>
                         </div>
                     </div>
@@ -199,12 +220,12 @@
                     <div class="form-check">
                         <div class="form-check form-check-inline">
                             <label class="form-check-label">
-                                <input type="radio" class="form-check-input" name="copia_cedula" value="Si">Sí
+                                <input type="radio" class="form-check-input" name="copia_cedula" value="Si" <?php echo ($estudiante['copia_cedula'] == 1) ? 'checked="checked"' : ''; ?>>Sí
                             </label>
                         </div>
                         <div class="form-check form-check-inline">
                             <label class="form-check-label">
-                                <input type="radio" class="form-check-input" name="copia_cedula" value="No">No
+                                <input type="radio" class="form-check-input" name="copia_cedula" value="No" <?php echo ($estudiante['copia_cedula'] == 0) ? 'checked="checked"' : ''; ?>>No
                             </label>
                         </div>
                     </div>
@@ -215,12 +236,12 @@
                     <div class="form-check">
                         <div class="form-check form-check-inline">
                             <label class="form-check-label">
-                                <input type="radio" class="form-check-input" name="copia_partida_nacimiento" value="Si">Sí
+                                <input type="radio" class="form-check-input" name="copia_partida_nacimiento" value="Si" <?php echo ($estudiante['copia_partida_nacimiento'] == 1) ? 'checked="checked"' : ''; ?>>Sí
                             </label>
                         </div>
                         <div class="form-check form-check-inline">
                             <label class="form-check-label">
-                                <input type="radio" class="form-check-input" name="copia_partida_nacimiento" value="No">No
+                                <input type="radio" class="form-check-input" name="copia_partida_nacimiento" value="No" <?php echo ($estudiante['copia_partida_nacimiento'] == 0) ? 'checked="checked"' : ''; ?>>No
                             </label>
                         </div>
                     </div>
@@ -231,12 +252,12 @@
                     <div class="form-check">
                         <div class="form-check form-check-inline">
                             <label class="form-check-label">
-                                <input type="radio" class="form-check-input" name="notas" value="Si">Sí
+                                <input type="radio" class="form-check-input" name="notas" value="Si" <?php echo ($estudiante['notas'] == 1) ? 'checked="checked"' : ''; ?>>Sí
                             </label>
                         </div>
                         <div class="form-check form-check-inline">
                             <label class="form-check-label">
-                                <input type="radio" class="form-check-input" name="notas" value="No">No
+                                <input type="radio" class="form-check-input" name="notas" value="No" <?php echo ($estudiante['notas'] == 0) ? 'checked="checked"' : ''; ?>>No
                             </label>
                         </div>
                     </div>
@@ -247,12 +268,12 @@
                     <div class="form-check">
                         <div class="form-check form-check-inline">
                             <label class="form-check-label">
-                                <input type="radio" class="form-check-input" name="fondo_negro" value="Si">Sí
+                                <input type="radio" class="form-check-input" name="fondo_negro" value="Si" <?php echo ($estudiante['fondo_negro'] == 1) ? 'checked="checked"' : ''; ?>>Sí
                             </label>
                         </div>
                         <div class="form-check form-check-inline">
                             <label class="form-check-label">
-                                <input type="radio" class="form-check-input" name="fondo_negro" value="No">No
+                                <input type="radio" class="form-check-input" name="fondo_negro" value="No" <?php echo ($estudiante['fondo_negro'] == 0) ? 'checked="checked"' : ''; ?>>No
                             </label>
                         </div>
                     </div>
@@ -260,7 +281,7 @@
             </div>
 
             <div class="form-group" align="center">
-                <input type="submit" class="btn btn-primary" value="Registrar estudiante">
+                <input type="submit" class="btn btn-primary" value="Modificar estudiante">
             </div>
 
         </form>
@@ -279,9 +300,6 @@
                             text : 'Seleccione una opcion...'
                         }));
                         $.each(data.result, function (i, item) {
-                            console.log('i, item:', i, item);
-                            console.log('item.id:',item.id);
-                            console.log('item.nombre:', item.nombre);
                             $('.select-carrera').append($('<option>', { 
                                 value: item.id,
                                 text : item.nombre 
