@@ -15,7 +15,7 @@ if($_SERVER["REQUEST_METHOD"] == "POST") {
         $error_query[] = 'err_nombre=1';
     }
 
-    if( isset($_POST['codigo']) && !empty($_POST['mencion']) ) {
+    if( isset($_POST['codigo']) && !empty($_POST['codigo']) ) {
         $codigo = $_POST['codigo'];
     } else {
         $error_msgs['codigo'] = 'El código es requerido';
