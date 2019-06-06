@@ -17,7 +17,7 @@ if($_SERVER["REQUEST_METHOD"] == "POST") {
         $referencia = $_POST['referencia'];        
     } else {
         $error_msgs['referencia'] = 'La referencia es requerida';
-        $error_query[] = 'err_referenciao=1';
+        $error_query[] = 'err_referencia=1';
     }
 
     if( isset($_POST['monto']) && !empty($_POST['monto']) ) {
@@ -53,11 +53,11 @@ if($_SERVER["REQUEST_METHOD"] == "POST") {
                 $stmt->bindParam(":fecha", $param_fecha, PDO::PARAM_STR);
                 $stmt->bindParam(":tipo", $param_tipo, PDO::PARAM_STR);
 
-                $param_id_estudiante    = $param_id_estudiante;
-                $param_referencia       = $param_referencia;
-                $param_monto            = $param_monto;
-                $param_fecha            = $param_fecha;
-                $param_tipo             = $param_tipo;
+                $param_id_estudiante    = $id_estudiante;
+                $param_referencia       = $referencia;
+                $param_monto            = $monto;
+                $param_fecha            = $fecha_pago;
+                $param_tipo             = $tipo_pago;
 
                 if($stmt->execute()) {
                     header("location: registroPa.php?exito=1");
