@@ -23,7 +23,7 @@
             WHERE `estudiantes`.`id`=:id_estudiante
             LIMIT 1";
 
-        $estudiante = null;
+        $estudiante = $mencion_actual = $carrera_actual = null;
         if($stmt = $pdo->prepare($sql)) {
             $stmt->bindParam(":id_estudiante", $param_usuario, PDO::PARAM_STR);
             $param_usuario = $_GET['id'];
@@ -32,6 +32,8 @@
                 if($stmt->rowCount() > 0){
                     while($row = $stmt->fetch()){
                         $estudiante = $row;
+                        $mencion_actual = $row['id_mencion'];
+                        $carrera_actual = $row['id_carrera'];
                     }
                 } else {
                     $error = 'No se encontró un estudiante con ese ID en la BD.';
@@ -41,6 +43,52 @@
             }
         }
         unset($stmt);
+
+        // Buscar 'menciones' para llenar el select:
+        $sql = "SELECT * from `menciones`";
+
+        $menciones = [];
+        if($stmt = $pdo->prepare($sql)) {
+            if($stmt->execute()) {
+                if($stmt->rowCount() > 0) {
+                    while($row = $stmt->fetch()){
+                        $menciones[ $row['id'] ] = [
+                            'nombre' => $row['nombre'],
+                            'codigo' => $row['codigo'],
+                        ];
+                    }
+                } else {
+                    $error = 'No se encontraron menciones en la BD.';
+                }
+            } else {
+                $error = 'Algo salió mal. Por favor intente más tarde.';
+            }
+        }
+        unset($stmt);
+
+        // Buscar 'menciones' para llenar el select:
+        $sql = "SELECT * from `carreras` WHERE `id_mencion`=:id_mencion";
+
+        $carreras = [];
+        if($stmt = $pdo->prepare($sql)) {
+            $stmt->bindParam(":id_mencion", $param_id_mencion, PDO::PARAM_STR);
+            $param_id_mencion = $mencion_actual;
+            if($stmt->execute()) {
+                if($stmt->rowCount() > 0) {
+                    while($row = $stmt->fetch()) {
+                        $carreras[ $row['id'] ] = [
+                            'nombre' => $row['nombre'],
+                        ];
+                    }
+                } else {
+                    $error = 'No se encontraron carreras en la BD.';
+                }
+            } else {
+                $error = 'Algo salió mal. Por favor intente más tarde.';
+            }
+        }
+        unset($stmt);
+
         unset($pdo);
     } else {
         $error_msgs = [];
@@ -219,6 +267,7 @@
         } else {
             header("location: editarEs.php?" .implode('&', $error_query));
         }
+        unset($pdo);
     }
 ?>
 <!DOCTYPE html>
@@ -338,14 +387,20 @@
                             <label for="mencion">Mención</label>
                             <input type="hidden" name="mencion_anterior" value="<?php echo $estudiante['id_mencion']; ?>">
                             <select name="mencion" class="form-control select-mencion">
-                                <option value="<?php echo $estudiante['id_mencion']; ?>"><?php echo $estudiante['mencion_nombre']; ?></option>
+                                <option>Seleccione una opción...</option>
+                            <?php foreach($menciones as $id => $mencion): ?>
+                                <option value="<?php echo $id; ?>" <?php echo ($id == $mencion_actual) ? 'selected' : ''; ?>><?php echo $mencion['nombre']; ?></option>
+                            <?php endforeach; ?>
                             </select>
                         </div>
                         <div class="col-sm">
                             <label for="carrera">Título universitario</label>
                             <input type="hidden" name="carrera_anterior" value="<?php echo $estudiante['id_carrera']; ?>">
                             <select name="carrera" class="form-control select-carrera">
-                                <option value="<?php echo $estudiante['id_carrera']; ?>"><?php echo $estudiante['carrera_nombre']; ?></option>
+                                <option>Seleccione una opción...</option>
+                                <?php foreach($carreras as $id => $carrera): ?>
+                                    <option value="<?php echo $id; ?>" <?php echo ($id == $carrera_actual) ? 'selected' : ''; ?>><?php echo $carrera['nombre']; ?></option>
+                                <?php endforeach; ?>
                             </select>
                         </div>
                     </div>	
