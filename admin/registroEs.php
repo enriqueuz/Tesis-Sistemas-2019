@@ -268,7 +268,7 @@
     <script>
         $('.select-mencion').on('change', function(event){
             var mencion = $(this).children("option:selected").val();
-            $.post( "listarCarreras.php", { id_mencion: mencion })
+            $.post( "listarCarrerasJSON.php", { id_mencion: mencion })
                 .done(function( result ) {
                     data = $.parseJSON(result);
                     if(data) {
