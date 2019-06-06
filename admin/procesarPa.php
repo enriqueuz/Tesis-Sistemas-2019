@@ -42,31 +42,35 @@ if($_SERVER["REQUEST_METHOD"] == "POST") {
     }
 
     if(empty($error_msgs)) {
-        $sql = "INSERT INTO pagos (id_estudiante, referencia, monto, fecha, tipo)
-        VALUES (:id_estudiante, :referencia, :monto, :fecha, :tipo)";
+        try {
+            $sql = "INSERT INTO pagos (id_estudiante, referencia, monto, fecha, tipo)
+            VALUES (:id_estudiante, :referencia, :monto, :fecha, :tipo)";
 
-        if($stmt = $pdo->prepare($sql)) {
-            $stmt->bindParam(":id_estudiante", $param_id_estudiante, PDO::PARAM_INT);
-            $stmt->bindParam(":referencia", $param_referencia, PDO::PARAM_STR);
-            $stmt->bindParam(":monto", $param_monto, PDO::PARAM_STR);
-            $stmt->bindParam(":fecha", $param_fecha, PDO::PARAM_STR);
-            $stmt->bindParam(":tipo", $param_tipo, PDO::PARAM_STR);
+            if($stmt = $pdo->prepare($sql)) {
+                $stmt->bindParam(":id_estudiante", $param_id_estudiante, PDO::PARAM_INT);
+                $stmt->bindParam(":referencia", $param_referencia, PDO::PARAM_STR);
+                $stmt->bindParam(":monto", $param_monto, PDO::PARAM_STR);
+                $stmt->bindParam(":fecha", $param_fecha, PDO::PARAM_STR);
+                $stmt->bindParam(":tipo", $param_tipo, PDO::PARAM_STR);
 
-            $param_id_estudiante    = $param_id_estudiante;
-            $param_referencia       = $param_referencia;
-            $param_monto            = $param_monto;
-            $param_fecha            = $param_fecha;
-            $param_tipo             = $param_tipo;
+                $param_id_estudiante    = $param_id_estudiante;
+                $param_referencia       = $param_referencia;
+                $param_monto            = $param_monto;
+                $param_fecha            = $param_fecha;
+                $param_tipo             = $param_tipo;
 
-            if($stmt->execute()) {
-                header("location: registroPa.php?exito=1");
-            } else {
-                echo "Algo salió mal. Por favor intente más tarde.";
+                if($stmt->execute()) {
+                    header("location: registroPa.php?exito=1");
+                } else {
+                    echo "Algo salió mal. Por favor intente más tarde.";
+                }
             }
+            unset($stmt);
+        } catch (PDOException $e) {
+            return $e;
         }
-        unset($stmt);
     } else {
-        header("location: registroPä.php?" .implode('&', $error_query));
+        header("location: registroPa.php?" .implode('&', $error_query));
     }
     unset($pdo);
 }
