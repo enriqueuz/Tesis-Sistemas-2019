@@ -64,7 +64,9 @@
                         `referencia`,
                         `monto`,
                         `fecha`,
-                        `tipo`
+                        `tipo`,
+                        `estudiantes`.`correo`,
+                        `estudiantes`.`telefono`
                         FROM `pagos`
                         JOIN `estudiantes` ON `pagos`.`id_estudiante`=`estudiantes`.`id`
                         ORDER BY `fecha`, `pagos`.`id_estudiante`";

@@ -88,6 +88,9 @@
     <h1>Registre un pago</h1>
     <br>
     <div class="container py-5">
+        <?php if( isset($_GET['exito']) && $_GET['exito'] == 1): ?>
+        <div class="alert alert-success">Se ha registrado el pago exitosamente.</div>
+        <?php endif; ?>
         <br>
         <form action="procesarPa.php" method="POST" name="fe" class="form-horizontal">
 
