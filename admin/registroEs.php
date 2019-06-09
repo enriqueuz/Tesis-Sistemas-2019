@@ -48,6 +48,7 @@
                        <li class="nav-item"><a class="nav-link text-light" href="../consultaEs.php">Consulte la información de un estudiante</a></li>
                        <li class="nav-item"><a class="nav-link text-light" href="../registroPa.php">Registre un pago</a></li>
                        <li class="nav-item"><a class="nav-link text-light" href="../consultaPa.php">Consulte un pago</a></li>
+                       <li class="nav-item"><a class="nav-link text-light" href="../admin/registroUs.php">Usuario nuevo</a></li>
                 </ul>
             <!--
                 <form class="form-inline my-2 my-lg-0">
