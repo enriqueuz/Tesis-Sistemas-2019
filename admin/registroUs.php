@@ -48,16 +48,23 @@ if($_SERVER["REQUEST_METHOD"] == "POST"){
         }
     }
 
+    $rol = $_POST["rol"];
+
+
+
+
     if(empty($usuario_err) && empty($clave_err) && empty($confirmar_clave_err)) {
         
-        $sql = "INSERT INTO usuarios (nombre, clave) VALUES (:usuario, :clave)";
+        $sql = "INSERT INTO usuarios (nombre, clave, rol) VALUES (:usuario, :clave, :rol)";
          
         if($stmt = $pdo->prepare($sql)) {
             $stmt->bindParam(":usuario", $param_usuario, PDO::PARAM_STR);
             $stmt->bindParam(":clave", $param_clave, PDO::PARAM_STR);
+            $stmt->bindParam(":rol", $param_rol, PDO::PARAM_STR);
             
             $param_usuario = $usuario;
             $param_clave = password_hash($clave, PASSWORD_DEFAULT); // Creates a clave hash
+            $param_rol = $rol;
             
             if($stmt->execute()){
                 header("location: ../index.php");
@@ -127,6 +134,14 @@ if($_SERVER["REQUEST_METHOD"] == "POST"){
                     <input type="clave" name="confirmar_clave" class="form-control" value="<?php echo $confirmar_clave; ?>">
                     <span class="help-block"><?php echo $confirmar_clave_err; ?></span>
                 </div>
+                <div class="form-group <?php echo (!empty($rol_err)) ? 'has-error' : ''; ?>">
+                    <label>Rol</label>
+                    <select type="select" name="rol" class="form-control" value="<?php echo $rol; ?>">
+                    	<option value="administrador">Administrador</option>
+                    	<option value="secretario">Secretario</option>
+                    </select>
+                </div>
+               
                 <div class="form-group">
                     <input type="submit" class="btn btn-info btn-block my-4" value="Registrar">
                     <input type="reset" class="btn btn-default btn-block my-4" value="Reiniciar">
