@@ -3,7 +3,7 @@
 <?php
 
 $usuario = $clave = $confirmar_clave = "";
-$usuario_err = $clave_err = $confirmar_clave_err = "";
+$usuario_err = $clave_err = $confirmar_clave_err = $rol_err = "";
  
 if($_SERVER["REQUEST_METHOD"] == "POST"){
  
@@ -48,12 +48,13 @@ if($_SERVER["REQUEST_METHOD"] == "POST"){
         }
     }
 
-    $rol = $_POST["rol"];
+    if(empty(trim($_POST["rol"]))) {
+        $rol_err = "Por favor seleccione un rol de usuario.";     
+    } else {
+        $rol = trim($_POST["rol"]);
+    }
 
-
-
-
-    if(empty($usuario_err) && empty($clave_err) && empty($confirmar_clave_err)) {
+    if(empty($usuario_err) && empty($clave_err) && empty($confirmar_clave_err) && empty($confirmar_clave_err)) {
         
         $sql = "INSERT INTO usuarios (nombre, clave, rol) VALUES (:usuario, :clave, :rol)";
          
@@ -67,7 +68,7 @@ if($_SERVER["REQUEST_METHOD"] == "POST"){
             $param_rol = $rol;
             
             if($stmt->execute()){
-                header("location: ../index.php");
+                header("location: ../index.php?registro_us=1");
             } else{
                 echo "Algo salió mal. Por favor intente más tarde.";
             }

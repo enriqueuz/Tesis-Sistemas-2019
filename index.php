@@ -78,6 +78,10 @@
                 Ha salido del sistema. Puede ingresar nuevamente.
             </div>
             <?php endif; ?>
+            <?php if (isset($_GET['registro_us']) && $_GET['registro_us'] == 1): ?>
+            <div class="alert alert-success">Usuario registrado correctamente.</div>
+            <?php endif; ?>
+
             <form action="ingresar.php" method="POST" class="form-check text-center border border-light p-5">
                 <h1 class="h3 mb-3 font-weight-normal">Ingrese a su usuario</h1>
                 <br>
