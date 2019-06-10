@@ -130,7 +130,7 @@ if($_SERVER["REQUEST_METHOD"] == "POST") {
                 <div class="row">
                     <div class="col-sm">	
                         <label for="mencion">Mención</label>
-                        <select name="mencion" class="form-control select-mencion">
+                        <select name="mencion" class="form-control select-mencion select2">
                             <option>Seleccione una opcion...</option>
                         <?php foreach($menciones as $id => $nombre): ?>
                             <option value="<?php echo $id; ?>"><?php echo $nombre; ?></option>

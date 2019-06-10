@@ -230,7 +230,7 @@ unset($pdo);
                     <div class="row">
                         <div class="col-sm">
                             <label for="id_estudiante" class="col-form-label-md">Estudiante:</label>
-                            <select id="idEstudiante" name="id_estudiante" class="form-control" required="required">
+                            <select id="idEstudiante" name="id_estudiante" class="form-control select2" required="required">
                                 <option>Seleccione un estudiante...</option>
                                 <?php foreach ($estudiantes as $id => $estudiante) : ?>
                                     <option value="<?php echo $id; ?>" <?php if(isset($id_estudiante)) { echo ($id_estudiante == $id) ? 'selected="selected"' : ''; } ?>>

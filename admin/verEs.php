@@ -150,13 +150,13 @@
                     <div class="row">
                         <div class="col-sm">
                             <label for="mencion">Mención</label>
-                            <select name="mencion" class="form-control select-mencion" readonly>
+                            <select name="mencion" class="form-control select-mencion select2" readonly>
                                 <option value="<?php echo $estudiante['id_mencion']; ?>"><?php echo $estudiante['mencion_nombre']; ?></option>
                             </select>
                         </div>
                         <div class="col-sm">
                             <label for="carrera">Título universitario</label>
-                            <select name="carrera" class="form-control select-carrera" readonly>
+                            <select name="carrera" class="form-control select-carrera select2" readonly>
                                 <option value="<?php echo $estudiante['id_carrera']; ?>"><?php echo $estudiante['carrera_nombre']; ?></option>
                             </select>
                         </div>

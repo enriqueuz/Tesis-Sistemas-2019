@@ -104,7 +104,7 @@
                     <div class="row">
                         <div class="col-lg-12">
                             <label for="referencia">Estudiante</label>
-                            <select id="idEstudiante" name="id_estudiante" class="form-control" required="required">
+                            <select id="idEstudiante" name="id_estudiante" class="form-control select2" required="required">
                                 <option>Seleccione un estudiante...</option>
                             <?php foreach($estudiantes as $id => $estudiante): ?>
                                 <option value="<?php echo $id; ?>">
@@ -139,7 +139,7 @@
 
                         <div class="col-sm">
                             <label for="tipo_pago">Tipo de pago</label>
-                            <select id="tipo_pago" name="tipo_pago" class="form-control">
+                            <select id="tipo_pago" name="tipo_pago" class="form-control select2">
                                 <option value="inscripcion">Inscripción</option>
                                 <option value="t1">Primer trimestre</option>
                                 <option value="t2">Segundo trimestre</option>

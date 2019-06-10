@@ -389,7 +389,7 @@
                         <div class="col-sm">
                             <label for="mencion">Mención</label>
                             <input type="hidden" name="mencion_anterior" value="<?php echo $estudiante['id_mencion']; ?>">
-                            <select name="mencion" class="form-control select-mencion">
+                            <select name="mencion" class="form-control select-mencion select2">
                                 <option>Seleccione una opción...</option>
                             <?php foreach($menciones as $id => $mencion): ?>
                                 <option value="<?php echo $id; ?>" <?php echo ($id == $mencion_actual) ? 'selected' : ''; ?>><?php echo $mencion['nombre']; ?></option>
@@ -399,7 +399,7 @@
                         <div class="col-sm">
                             <label for="carrera">Título universitario</label>
                             <input type="hidden" name="carrera_anterior" value="<?php echo $estudiante['id_carrera']; ?>">
-                            <select name="carrera" class="form-control select-carrera">
+                            <select name="carrera" class="form-control select-carrera select2">
                                 <option>Seleccione una opción...</option>
                                 <?php foreach($carreras as $id => $carrera): ?>
                                     <option value="<?php echo $id; ?>" <?php echo ($id == $carrera_actual) ? 'selected' : ''; ?>><?php echo $carrera['nombre']; ?></option>
