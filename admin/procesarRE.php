@@ -157,18 +157,30 @@ if($_SERVER["REQUEST_METHOD"] == "POST") {
                     $param_fondo_negro = $fondo_negro;
 
                     if($stmt_insert_2->execute()) {
-                        header("location: registroEs.php?exito=1");
+                        $sql3 = "INSERT INTO chequeo_pagos (id_estudiante, pago_inscripcion, pago_t1, pago_t2, pago_t3, pago_t4, pago_mg)
+                        VALUES (:id_estudiante, 0, 0, 0, 0, 0, 0)";
+                
+                        if($stmt_insert_3 = $pdo->prepare($sql3)){
+
+                            $stmt_insert_3->bindParam(":id_estudiante", $param_id_estudiante, PDO::PARAM_INT);
+                            $param_id_estudiante = $id_estudiante;
+
+                            if($stmt_insert_3->execute()) {
+                                header("location: registroEs.php?exito=1");
+                            } else {
+                                echo "Algo salió mal. Por favor intente más tarde.";
+                            }
+                        }
+                        unset($stmt_insert_3);
                     } else {
                         echo "Algo salió mal. Por favor intente más tarde.";
                     }
                 }
-
                 unset($stmt_insert_2);
             } else {
                 echo "Algo salió mal. Por favor intente más tarde.";
             }
         }
-
         unset($stmt_insert_1);
     } else {
         header("location: registroEs.php?" .implode('&', $error_query));
