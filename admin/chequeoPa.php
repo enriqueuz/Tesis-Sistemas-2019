@@ -189,7 +189,10 @@ unset($pdo);
     <link rel="icon" type="image/jpg" href="../img/logo.jpg">
     <script type="text/javascript" src="../js/jquery-3.4.1.min.js"></script>
     <script type="text/javascript" src="../js/bootstrap.min.js"></script>
+    <script type="text/javascript" src="../js/select2.min.js"></script>
     <link rel="stylesheet" type="text/css" href="../css/bootstrap.min.css">
+    <link rel="stylesheet" type="text/css" href="../css/select2.min.css">
+    <link rel="stylesheet" type="text/css" href="../css/select2-bootstrap4.min.css">
 </head>
 
 <body>
@@ -326,5 +329,12 @@ unset($pdo);
             </div>
         </form>
     </div>
+    <script>
+        $( document ).ready(function() {
+            $( ".select2" ).select2({
+                theme: "bootstrap"
+            });
+        });
+    </script>
 </body>
 </html>
