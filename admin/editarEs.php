@@ -558,6 +558,7 @@
                                 text : item.nombre 
                             }));
                         });
+                        $('.select-carrera').trigger('change');
                     }
                 });
         });

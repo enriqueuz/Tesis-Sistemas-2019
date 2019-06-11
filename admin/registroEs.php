@@ -282,14 +282,12 @@
                             text : 'Seleccione una opcion...'
                         }));
                         $.each(data.result, function (i, item) {
-                            console.log('i, item:', i, item);
-                            console.log('item.id:',item.id);
-                            console.log('item.nombre:', item.nombre);
                             $('.select-carrera').append($('<option>', { 
                                 value: item.id,
                                 text : item.nombre 
                             }));
                         });
+                        $('.select-carrera').trigger('change');
                     }
                 });
         });
