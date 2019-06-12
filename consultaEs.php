@@ -9,7 +9,5 @@ require_once('sesion.php');
 if(isset($_SESSION['rol']) && in_array($_SESSION['rol'], ['administrador'])) {
     header('location: admin/consultaEs.php');
 } else {
-    echo 'Error: El usuario actual no está autorizado para realizar esta acción.';
-    // Datos de sesión para buscar errores.
-    print_r($_SESSION);
+	header('location: consultaEsSec.php');
 }
