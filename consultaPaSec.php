@@ -15,7 +15,7 @@
 
     <header>
         <nav class="navbar navbar-expand-lg navbar-light" style="background-color: #AAA9AB">
-            <a class="navbar-brand" href="../paginaP.php">Programa de Profesionalización Docente de la ULA</a>
+            <a class="navbar-brand" href="paginaP.php">Programa de Profesionalización Docente de la ULA</a>
             <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="falsse" aria-label="Toggle navigation">
                 <span class="navbar-toggler-icon"></span>
             </button>
