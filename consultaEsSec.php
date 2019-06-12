@@ -22,11 +22,11 @@
 
             <div class="collapse navbar-collapse" id="navbarSupportedContent">
                 <ul class="navbar-nav mr-auto">
-                    <li class="nav-item"><a class="nav-link text-light" href="registroEs.php">Registre un
+                    <li class="nav-item"><a class="nav-link text-light disabled" href="registroEs.php">Registre un
 							estudiante</a></li>
                     <li class="nav-item"><a class="nav-link disabled text-light" href="../consultaEs.php">Consulte la
 							información de un estudiante</a></li>
-                    <li class="nav-item"><a class="nav-link text-light" href="registroPa.php">Registre un pago</a></li>
+                    <li class="nav-item"><a class="nav-link text-light disabled" href="registroPa.php">Registre un pago</a></li>
                     <li class="nav-item"><a class="nav-link text-light" href="consultaPa.php">Consulte un pago</a></li>
                 </ul>
             <!--
