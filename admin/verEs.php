@@ -91,6 +91,9 @@
     <br>
     <div class="container py-5">
         <br>
+        <?php if( isset($_GET['exito_edicion']) && $_GET['exito_edicion'] == 1): ?>
+        <div class="alert alert-success">Se ha editado al estudiante de forma exitosa.</div>
+        <?php endif; ?>
         <div class="form-horizontal"> 
 
             <div class="form-group">

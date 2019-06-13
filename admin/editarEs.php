@@ -91,183 +91,189 @@
 
         unset($pdo);
     } else {
-        $error_msgs = [];
-        $error_query = [];
-        if( isset($_POST['id_estudiante']) && !empty($_POST['id_estudiante']) ) {
-            $id_estudiante = $_POST['id_estudiante'];
-        } else {
-            $error_msgs['id_estudiante'] = 'El ID del estudiante es requerido';
-            $error_query[] = 'err_id_estudiante=1';
-        }
-
-        if( isset($_POST['nombre']) && !empty($_POST['nombre']) ) {
-            $nombre = $_POST['nombre'];
-        } else {
-            $error_msgs['nombre'] = 'El nombre es requerido';
-            $error_query[] = 'err_nombre=1';
-        }
-
-        if( isset($_POST['apellido']) && !empty($_POST['apellido']) ) {
-            $apellido = $_POST['apellido'];        
-        } else {
-            $error_msgs['apellido'] = 'El apellido es requerido';
-            $error_query[] = 'err_apellido=1';
-        }
-
-        if( isset($_POST['cedula']) && !empty($_POST['cedula']) ) {
-            $cedula = $_POST['cedula'];
-        } else {
-            $error_msgs['cedula'] = 'La cédula es requerida';
-            $error_query[] = 'err_cedula=1';
-        }
-
-        if( isset($_POST['telefono']) && !empty($_POST['telefono']) ) {
-            $telefono = $_POST['telefono'];
-        } else {
-            $error_msgs['telefono'] = 'El teléfono es requerido';
-            $error_query[] = 'err_telefono=1';
-        }
-
-        if( isset($_POST['sexo']) && !empty($_POST['sexo']) ) {
-            $sexo = $_POST['sexo'];
-        } else {
-            $error_msgs['sexo'] = 'El sexo es requerido';
-            $error_query[] = 'err_sexo=1';
-        }
-
-        if( isset($_POST['correo']) && !empty($_POST['correo']) ) {
-            $correo = $_POST['correo'];
-        } else {
-            $error_msgs['correo'] = 'El correo electrónico es requerido';
-            $error_query[] = 'err_correo=1';
-        }
-
-        if( isset($_POST['fecha_nacimiento']) && !empty($_POST['fecha_nacimiento']) ) {
-            $fecha_nacimiento = $_POST['fecha_nacimiento'];
-        } else {
-            $error_msgs['fecha_nacimiento'] = 'La fecha de nacimiento es requerida';
-            $error_query[] = 'err_fecha_nacimiento=1';
-        }
-
-        if( isset($_POST['carrera']) && !empty($_POST['carrera']) ) {
-            $carrera = $_POST['carrera'];
-        } else {
-            $error_msgs['carrera'] = 'El título universitario es requerido';
-            $error_query[] = 'err_id_carrera=1';
-        }
-
-        if(empty($error_msgs)) {
-
-            $sql = "UPDATE estudiantes SET (id_carrera=:id_carrera, cedula=:cedula, nombre=:nombre, apellido=:apellido, sexo=:sexo, telefono=:telefono, correo=:correo, fecha_nacimiento=:fecha_nacimiento)
-            WHERE id=:id_estudiante";
-
-            if($stmt_update_1 = $pdo->prepare($sql)){
-                $stmt_update_1->bindParam(":id_carrera", $param_id_carrera, PDO::PARAM_INT);
-                $stmt_update_1->bindParam(":cedula", $param_cedula, PDO::PARAM_STR);
-                $stmt_update_1->bindParam(":nombre", $param_nombre, PDO::PARAM_STR);
-                $stmt_update_1->bindParam(":apellido", $param_apellido, PDO::PARAM_STR);
-                $stmt_update_1->bindParam(":sexo", $param_sexo, PDO::PARAM_STR);
-                $stmt_update_1->bindParam(":telefono", $param_telefono, PDO::PARAM_STR);
-                $stmt_update_1->bindParam(":correo", $param_correo, PDO::PARAM_STR);
-                $stmt_update_1->bindParam(":fecha_nacimiento", $param_fecha_nacimiento, PDO::PARAM_STR);
-                $stmt_update_1->bindParam(":id_estudiante", $param_id_estudiante, PDO::PARAM_INT);
-
-                $param_id_carrera       = $carrera;
-                $param_cedula           = $cedula;
-                $param_nombre           = $nombre;
-                $param_apellido         = $apellido;
-                $param_sexo             = $sexo;
-                $param_telefono         = $telefono;
-                $param_correo           = $correo;
-                $param_fecha_nacimiento = $fecha_nacimiento;
-                $param_id_estudiante    = $id_estudiante;
-
-                if($stmt_update_1->execute()) {
-                    // TODO: Esto maneja radio buttons tal como está. Se puede modificar para manejar checkboxes.
-                    // Para checkboxes, la expresion interna del if pasa a ser directamente: $variable = true; 
-                    if( isset($_POST['constancia_trabajo']) && !empty($_POST['constancia_trabajo']) ) {
-                        $constancia_trabajo = (strtolower($_POST['constancia_trabajo']) == 'si') ? true : false;
-                    } else {
-                        $constancia_trabajo = false;
-                    }
-
-                    if( isset($_POST['curriculum']) && !empty($_POST['curriculum']) ) {
-                        $curriculum = (strtolower($_POST['curriculum']) == 'si') ? true : false;
-                    } else {
-                        $curriculum = false;
-                    }
-
-                    if( isset($_POST['foto_carnet']) && !empty($_POST['foto_carnet']) ) {
-                        $foto_carnet = (strtolower($_POST['foto_carnet']) == 'si') ? true : false;
-                    } else {
-                        $foto_carnet = false;
-                    }
-
-                    if( isset($_POST['copia_cedula']) && !empty($_POST['copia_cedula']) ) {
-                        $copia_cedula = (strtolower($_POST['copia_cedula']) == 'si') ? true : false;
-                    } else {
-                        $copia_cedula = false;
-                    }
-
-                    if( isset($_POST['copia_partida_nacimiento']) && !empty($_POST['copia_partida_nacimiento']) ) {
-                        $copia_partida_nacimiento = (strtolower($_POST['copia_partida_nacimiento']) == 'si') ? true : false;
-                    } else {
-                        $copia_partida_nacimiento = false;
-                    }
-
-                    if( isset($_POST['notas']) && !empty($_POST['notas']) ) {
-                        $notas = (strtolower($_POST['notas']) == 'si') ? true : false;
-                    } else {
-                        $notas = false;
-                    }
-
-                    if( isset($_POST['fondo_negro']) && !empty($_POST['fondo_negro']) ) {
-                        $fondo_negro = (strtolower($_POST['fondo_negro']) == 'si') ? true : false;
-                    } else {
-                        $fondo_negro = false;
-                    }
-
-                    $sql2 = "UPDATE documentos_estudiantes SET (constancia_trabajo=:constancia_trabajo, curriculum=:curriculum, foto_carnet=:foto_carnet, copia_cedula=:copia_cedula, copia_partida_nacimiento=:copia_partida_nacimiento, notas=:notas, fondo_negro=:fondo_negro)
-                            WHERE id_estudiante=:id_estudiante";
-                    
-                    if($stmt_update_2 = $pdo->prepare($sql2)){
-
-                        $stmt_update_2->bindParam(":constancia_trabajo", $param_constancia_trabajo, PDO::PARAM_BOOL);
-                        $stmt_update_2->bindParam(":curriculum", $param_curriculum, PDO::PARAM_BOOL);
-                        $stmt_update_2->bindParam(":foto_carnet", $param_foto_carnet, PDO::PARAM_BOOL);
-                        $stmt_update_2->bindParam(":copia_cedula", $param_copia_cedula, PDO::PARAM_BOOL);
-                        $stmt_update_2->bindParam(":copia_partida_nacimiento", $param_copia_partida_nacimiento, PDO::PARAM_BOOL);
-                        $stmt_update_2->bindParam(":notas", $param_notas, PDO::PARAM_BOOL);
-                        $stmt_update_2->bindParam(":fondo_negro", $param_fondo_negro, PDO::PARAM_BOOL);
-                        $stmt_update_2->bindParam(":id_estudiante", $param_id_estudiante, PDO::PARAM_INT);
-
-                        $param_constancia_trabajo       = $constancia_trabajo;
-                        $param_curriculum               = $curriculum;
-                        $param_foto_carnet              = $foto_carnet;
-                        $param_copia_cedula             = $copia_cedula;
-                        $param_copia_partida_nacimiento = $copia_partida_nacimiento;
-                        $param_notas                    = $notas;
-                        $param_fondo_negro              = $fondo_negro;
-                        $param_id_estudiante            = $id_estudiante;
-
-                        if($stmt_update_2->execute()) {
-                            header("location: editarEs.php?exito=1");
-                        } else {
-                            echo "Algo salió mal. Por favor intente más tarde.";
-                        }
-                    }
-
-                    unset($stmt_update_2);
-                } else {
-                    echo "Algo salió mal. Por favor intente más tarde.";
-                }
+        // Garantizar que se está haciendo un POST a la página para que no hayan lazos de carga infinitos.
+        if($_SERVER["REQUEST_METHOD"] == "POST") {
+            $error_msgs = [];
+            $error_query = [];
+            if( isset($_POST['id_estudiante']) && !empty($_POST['id_estudiante']) ) {
+                $id_estudiante = $_POST['id_estudiante'];
+            } else {
+                $error_msgs['id_estudiante'] = 'El ID del estudiante es requerido';
+                $error_query[] = 'err_id_estudiante=1';
             }
 
-            unset($stmt_update_1);
+            if( isset($_POST['nombre']) && !empty($_POST['nombre']) ) {
+                $nombre = $_POST['nombre'];
+            } else {
+                $error_msgs['nombre'] = 'El nombre es requerido';
+                $error_query[] = 'err_nombre=1';
+            }
+
+            if( isset($_POST['apellido']) && !empty($_POST['apellido']) ) {
+                $apellido = $_POST['apellido'];        
+            } else {
+                $error_msgs['apellido'] = 'El apellido es requerido';
+                $error_query[] = 'err_apellido=1';
+            }
+
+            if( isset($_POST['cedula']) && !empty($_POST['cedula']) ) {
+                $cedula = $_POST['cedula'];
+            } else {
+                $error_msgs['cedula'] = 'La cédula es requerida';
+                $error_query[] = 'err_cedula=1';
+            }
+
+            if( isset($_POST['telefono']) && !empty($_POST['telefono']) ) {
+                $telefono = $_POST['telefono'];
+            } else {
+                $error_msgs['telefono'] = 'El teléfono es requerido';
+                $error_query[] = 'err_telefono=1';
+            }
+
+            if( isset($_POST['sexo']) && !empty($_POST['sexo']) ) {
+                $sexo = $_POST['sexo'];
+            } else {
+                $error_msgs['sexo'] = 'El sexo es requerido';
+                $error_query[] = 'err_sexo=1';
+            }
+
+            if( isset($_POST['correo']) && !empty($_POST['correo']) ) {
+                $correo = $_POST['correo'];
+            } else {
+                $error_msgs['correo'] = 'El correo electrónico es requerido';
+                $error_query[] = 'err_correo=1';
+            }
+
+            if( isset($_POST['fecha_nacimiento']) && !empty($_POST['fecha_nacimiento']) ) {
+                $fecha_nacimiento = $_POST['fecha_nacimiento'];
+            } else {
+                $error_msgs['fecha_nacimiento'] = 'La fecha de nacimiento es requerida';
+                $error_query[] = 'err_fecha_nacimiento=1';
+            }
+
+            if( isset($_POST['carrera']) && !empty($_POST['carrera']) ) {
+                $carrera = $_POST['carrera'];
+            } else {
+                $error_msgs['carrera'] = 'El título universitario es requerido';
+                $error_query[] = 'err_id_carrera=1';
+            }
+
+            if(empty($error_msgs)) {
+
+                $sql = "UPDATE estudiantes SET id_carrera=:id_carrera, cedula=:cedula, nombre=:nombre, apellido=:apellido, sexo=:sexo, telefono=:telefono, correo=:correo, fecha_nacimiento=:fecha_nacimiento
+                WHERE id=:id_estudiante";
+
+                if($stmt_update_1 = $pdo->prepare($sql)){
+                    $stmt_update_1->bindParam(":id_carrera", $param_id_carrera, PDO::PARAM_INT);
+                    $stmt_update_1->bindParam(":cedula", $param_cedula, PDO::PARAM_STR);
+                    $stmt_update_1->bindParam(":nombre", $param_nombre, PDO::PARAM_STR);
+                    $stmt_update_1->bindParam(":apellido", $param_apellido, PDO::PARAM_STR);
+                    $stmt_update_1->bindParam(":sexo", $param_sexo, PDO::PARAM_STR);
+                    $stmt_update_1->bindParam(":telefono", $param_telefono, PDO::PARAM_STR);
+                    $stmt_update_1->bindParam(":correo", $param_correo, PDO::PARAM_STR);
+                    $stmt_update_1->bindParam(":fecha_nacimiento", $param_fecha_nacimiento, PDO::PARAM_STR);
+                    $stmt_update_1->bindParam(":id_estudiante", $param_id_estudiante, PDO::PARAM_INT);
+
+                    $param_id_carrera       = $carrera;
+                    $param_cedula           = $cedula;
+                    $param_nombre           = $nombre;
+                    $param_apellido         = $apellido;
+                    $param_sexo             = $sexo;
+                    $param_telefono         = $telefono;
+                    $param_correo           = $correo;
+                    $param_fecha_nacimiento = $fecha_nacimiento;
+                    $param_id_estudiante    = $id_estudiante;
+
+                    if($stmt_update_1->execute()) {
+                        // TODO: Esto maneja radio buttons tal como está. Se puede modificar para manejar checkboxes.
+                        // Para checkboxes, la expresion interna del if pasa a ser directamente: $variable = true; 
+                        if( isset($_POST['constancia_trabajo']) && !empty($_POST['constancia_trabajo']) ) {
+                            $constancia_trabajo = (strtolower($_POST['constancia_trabajo']) == 'si') ? true : false;
+                        } else {
+                            $constancia_trabajo = false;
+                        }
+
+                        if( isset($_POST['curriculum']) && !empty($_POST['curriculum']) ) {
+                            $curriculum = (strtolower($_POST['curriculum']) == 'si') ? true : false;
+                        } else {
+                            $curriculum = false;
+                        }
+
+                        if( isset($_POST['foto_carnet']) && !empty($_POST['foto_carnet']) ) {
+                            $foto_carnet = (strtolower($_POST['foto_carnet']) == 'si') ? true : false;
+                        } else {
+                            $foto_carnet = false;
+                        }
+
+                        if( isset($_POST['copia_cedula']) && !empty($_POST['copia_cedula']) ) {
+                            $copia_cedula = (strtolower($_POST['copia_cedula']) == 'si') ? true : false;
+                        } else {
+                            $copia_cedula = false;
+                        }
+
+                        if( isset($_POST['copia_partida_nacimiento']) && !empty($_POST['copia_partida_nacimiento']) ) {
+                            $copia_partida_nacimiento = (strtolower($_POST['copia_partida_nacimiento']) == 'si') ? true : false;
+                        } else {
+                            $copia_partida_nacimiento = false;
+                        }
+
+                        if( isset($_POST['notas']) && !empty($_POST['notas']) ) {
+                            $notas = (strtolower($_POST['notas']) == 'si') ? true : false;
+                        } else {
+                            $notas = false;
+                        }
+
+                        if( isset($_POST['fondo_negro']) && !empty($_POST['fondo_negro']) ) {
+                            $fondo_negro = (strtolower($_POST['fondo_negro']) == 'si') ? true : false;
+                        } else {
+                            $fondo_negro = false;
+                        }
+
+                        $sql2 = "UPDATE documentos_estudiantes SET constancia_trabajo=:constancia_trabajo, curriculum=:curriculum, foto_carnet=:foto_carnet, copia_cedula=:copia_cedula, copia_partida_nacimiento=:copia_partida_nacimiento, notas=:notas, fondo_negro=:fondo_negro
+                                WHERE id_estudiante=:id_estudiante";
+                        
+                        if($stmt_update_2 = $pdo->prepare($sql2)){
+
+                            $stmt_update_2->bindParam(":constancia_trabajo", $param_constancia_trabajo, PDO::PARAM_BOOL);
+                            $stmt_update_2->bindParam(":curriculum", $param_curriculum, PDO::PARAM_BOOL);
+                            $stmt_update_2->bindParam(":foto_carnet", $param_foto_carnet, PDO::PARAM_BOOL);
+                            $stmt_update_2->bindParam(":copia_cedula", $param_copia_cedula, PDO::PARAM_BOOL);
+                            $stmt_update_2->bindParam(":copia_partida_nacimiento", $param_copia_partida_nacimiento, PDO::PARAM_BOOL);
+                            $stmt_update_2->bindParam(":notas", $param_notas, PDO::PARAM_BOOL);
+                            $stmt_update_2->bindParam(":fondo_negro", $param_fondo_negro, PDO::PARAM_BOOL);
+                            $stmt_update_2->bindParam(":id_estudiante", $param_id_estudiante, PDO::PARAM_INT);
+
+                            $param_constancia_trabajo       = $constancia_trabajo;
+                            $param_curriculum               = $curriculum;
+                            $param_foto_carnet              = $foto_carnet;
+                            $param_copia_cedula             = $copia_cedula;
+                            $param_copia_partida_nacimiento = $copia_partida_nacimiento;
+                            $param_notas                    = $notas;
+                            $param_fondo_negro              = $fondo_negro;
+                            $param_id_estudiante            = $id_estudiante;
+
+                            if($stmt_update_2->execute()) {
+                                header("location: verEs.php?exito_edicion=1&id={$id_estudiante}");
+                            } else {
+                                echo "Algo salió mal. Por favor intente más tarde.";
+                            }
+                        }
+
+                        unset($stmt_update_2);
+                    } else {
+                        echo "Algo salió mal. Por favor intente más tarde.";
+                    }
+                }
+
+                unset($stmt_update_1);
+            } else {
+                header("location: editarEs.php?" .implode('&', $error_query));
+            }
+            unset($pdo);
         } else {
-            header("location: editarEs.php?" .implode('&', $error_query));
+            //Redirigir de vuelta a consultaEs.php porque no se especificó estudiante a editar.
+            header("location: consultaEs.php");
         }
-        unset($pdo);
     }
 ?>
 <!DOCTYPE html>
@@ -318,7 +324,7 @@
     <br>
     <div class="container py-5">
         <br>
-        <?php if( isset($_GET['exito']) && $_GET['exito'] == 1): ?>
+        <?php if( isset($_GET['exito_edicion']) && $_GET['exito_edicion'] == 1): ?>
         <div class="alert alert-success">Se ha editado al estudiante de forma exitosa.</div>
         <?php endif; ?>
         <form action="<?php echo htmlspecialchars($_SERVER["PHP_SELF"]); ?>" method="POST" name="fee" class="form-horizontal"> 
