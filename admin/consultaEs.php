@@ -9,6 +9,7 @@
     <link rel="icon" type="image/jpg" href="../img/logo.jpg">
     <script type="text/javascript" src="../js/jquery-3.4.1.min.js"></script>
     <script type="text/javascript" src="../js/bootstrap.min.js"></script>
+    <script type="text/javascript" src="../js/jquery.dataTables.min.js"></script>
     <link rel="stylesheet" type="text/css" href="../css/bootstrap.min.css">
 </head>
 
@@ -42,10 +43,14 @@
     </header>
 
     <h1>Consulte la información de un estudiante</h1>
+    <br>
+    <?php if( isset($_GET['eliminado']) && $_GET['eliminado'] == 1): ?>
+    <div class="alert alert-success container py-2 col-lg-4" align="center">Se eliminó exitosamente al estudiante</div>
+    <?php endif; ?>
     <div class="container">
 		<div class="row mt-5">
             <!-- Inicia tabla de consulta-->
-            <table class="table">
+            <table id="tablaestudiantes" class="table">
                 <thead>
                     <tr>
                         <th>Cédula</th>
@@ -54,8 +59,8 @@
                         <th>Correo</th>
                         <th>Teléfono</th>
                         <th>Fecha de nacimiento</th>
-                        <th>Título universitario</th>
                         <th>Mención</th>
+                        <th>Título universitario</th>
                         <th>Acciones</th>
                     </tr>
                 </thead>
@@ -107,6 +112,37 @@
             </table>
         </div><!--/.row-->
     </div><!--/.container-->
+        <script> 
+			$(document).ready(function() {
+		    $('#tablaestudiantes').DataTable({
+		    	"language": idioma_espanol
+		    });
+		} );
+		var idioma_espanol = {
+		    "sProcessing":     "Procesando...",
+		    "sLengthMenu":     "Mostrar _MENU_ registros",
+		    "sZeroRecords":    "No se encontraron resultados",
+		    "sEmptyTable":     "Ningún dato disponible en esta tabla",
+		    "sInfo":           "Mostrando registros del _START_ al _END_ de un total de _TOTAL_ registros",
+		    "sInfoEmpty":      "Mostrando registros del 0 al 0 de un total de 0 registros",
+		    "sInfoFiltered":   "(filtrado de un total de _MAX_ registros)",
+		    "sInfoPostFix":    "",
+		    "sSearch":         "Buscar:",
+		    "sUrl":            "",
+		    "sInfoThousands":  ",",
+		    "sLoadingRecords": "Cargando...",
+		    "oPaginate": {
+		        "sFirst":    "Primero",
+		        "sLast":     "Último",
+		        "sNext":     "Siguiente",
+		        "sPrevious": "Anterior"
+		    },
+		    "oAria": {
+		        "sSortAscending":  ": Activar para ordenar la columna de manera ascendente",
+		        "sSortDescending": ": Activar para ordenar la columna de manera descendente"
+    }
+}
+    </script>
 </body>
 
 </html>
