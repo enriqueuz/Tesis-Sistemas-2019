@@ -92,7 +92,11 @@
     <div class="container py-5">
         <br>
         <?php if( isset($_GET['exito_edicion']) && $_GET['exito_edicion'] == 1): ?>
-        <div class="alert alert-success">Se ha editado al estudiante de forma exitosa.</div>
+        <div class="alert alert-success container py-2 col-lg-4" align="center">Se ha editado al estudiante de forma exitosa.</div>
+        <?php endif; ?>
+
+		<?php if( isset($_GET['error']) && $_GET['error'] == 1): ?>
+        <div class="alert alert-warning container py-2 col-lg-4" align="center">No se ha podido eliminar al estudiante.</div>
         <?php endif; ?>
         <div class="form-horizontal"> 
 
@@ -282,10 +286,15 @@
                     </div>
                 </div>
             </div>
-
-            <div class="form-group" align="center">
-                <button class="btn btn-primary" onclick="window.location.href='editarEs.php?editar=1&id=<?php echo $estudiante["id"]; ?>'">Editar estudiante</button>
-            </div>
+		<br>
+			<div class="row">
+	            <div class="form-group col" align="center">
+	                <button class="btn btn-primary" onclick="window.location.href='editarEs.php?editar=1&id=<?php echo $estudiante["id"]; ?>'">Editar estudiante</button>
+	            </div>
+				<div class="form-group col" align="center">
+	                <button class="btn btn-danger" onclick="window.location.href='eliminarEs.php?eliminar=1&id=<?php echo $estudiante["id"]; ?>'">Eliminar estudiante</button>
+	            </div>
+			</div>
 
         </div>
 
