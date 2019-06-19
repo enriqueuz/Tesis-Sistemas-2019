@@ -333,13 +333,13 @@
             <div class="form-group">
                 <h2>Datos personales</h2>
                 <div class="row">
-                    <div class="col-sm">					
+                    <div class="col-sm">
                         <label for="nombre">Nombre</label>
                         <input type="hidden" name="nombre_anterior" value="<?php echo $estudiante['nombre']; ?>">
                         <input type="text" name="nombre" class="form-control" value="<?php echo $estudiante['nombre']; ?>">
                     </div>
 
-                    <div class="col-sm">					
+                    <div class="col-sm">
                         <label for="apellido">Apellido</label>
                         <input type="hidden" name="apellido_anterior" value="<?php echo $estudiante['apellido']; ?>">
                         <input type="text" name="apellido" class="form-control" value="<?php echo $estudiante['apellido']; ?>">
@@ -377,7 +377,7 @@
 
                 <div class="form-group">
                     <div class="row">
-                        <div class="col-sm">	
+                        <div class="col-sm">
                             <label for="correo">Correo electrónico</label>
                             <input type="hidden" name="correo_anterior" value="<?php echo $estudiante['correo']; ?>">
                             <input type="email" name="correo" class="form-control" value="<?php echo $estudiante['correo']; ?>">

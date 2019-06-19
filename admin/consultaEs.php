@@ -95,7 +95,10 @@
                                     echo "\t<td>{$row['fecha_nacimiento']}</td>".PHP_EOL;
                                     echo "\t<td>{$row['mencion_nombre']}</td>".PHP_EOL;
                                     echo "\t<td>{$row['carrera_nombre']}</td>".PHP_EOL;
-                                    echo "\t<td><a class='btn btn-info' href='verEs.php?id={$row['id']}'>Ver Datos</a></td>".PHP_EOL;
+                                    echo '\t<td>'.
+                                        "<a class='btn btn-info' href='verEs.php?id={$row['id']}'>Ver Datos</a>".
+                                        "<a class='btn btn-danger' href='eliminarEs.php?id={$row['id']}' onclick='confirm(\'Confirma que desea eliminar al estudiante?\');'>Eliminar</a>".
+                                    '</td>'.PHP_EOL;
                                     echo "</tr>".PHP_EOL;
                                 }
                             } else {
