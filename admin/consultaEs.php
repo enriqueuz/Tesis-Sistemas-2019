@@ -97,7 +97,7 @@
                                     echo "\t<td>{$row['carrera_nombre']}</td>".PHP_EOL;
                                     echo '\t<td>'.
                                         "<a class='btn btn-info' href='verEs.php?id={$row['id']}'>Ver Datos</a>".
-                                        "<a class='btn btn-danger' href='eliminarEs.php?id={$row['id']}' onclick='confirm(\'Confirma que desea eliminar al estudiante?\');'>Eliminar</a>".
+                                        "<a class='btn btn-danger confirma-eliminar' href='eliminarEs.php?id={$row['id']}'>Eliminar</a>".
                                     '</td>'.PHP_EOL;
                                     echo "</tr>".PHP_EOL;
                                 }
@@ -115,36 +115,39 @@
             </table>
         </div><!--/.row-->
     </div><!--/.container-->
-        <script> 
-			$(document).ready(function() {
-		    $('#tablaestudiantes').DataTable({
-		    	"language": idioma_espanol
-		    });
-		} );
-		var idioma_espanol = {
-		    "sProcessing":     "Procesando...",
-		    "sLengthMenu":     "Mostrar _MENU_ registros",
-		    "sZeroRecords":    "No se encontraron resultados",
-		    "sEmptyTable":     "Ningún dato disponible en esta tabla",
-		    "sInfo":           "Mostrando registros del _START_ al _END_ de un total de _TOTAL_ registros",
-		    "sInfoEmpty":      "Mostrando registros del 0 al 0 de un total de 0 registros",
-		    "sInfoFiltered":   "(filtrado de un total de _MAX_ registros)",
-		    "sInfoPostFix":    "",
-		    "sSearch":         "Buscar:",
-		    "sUrl":            "",
-		    "sInfoThousands":  ",",
-		    "sLoadingRecords": "Cargando...",
-		    "oPaginate": {
-		        "sFirst":    "Primero",
-		        "sLast":     "Último",
-		        "sNext":     "Siguiente",
-		        "sPrevious": "Anterior"
-		    },
-		    "oAria": {
-		        "sSortAscending":  ": Activar para ordenar la columna de manera ascendente",
-		        "sSortDescending": ": Activar para ordenar la columna de manera descendente"
-    }
-}
+    <script> 
+        $(document).ready(function() {
+            $('#tablaestudiantes').DataTable({
+                "language": idioma_espanol
+            });
+        } );
+        var idioma_espanol = {
+            "sProcessing":     "Procesando...",
+            "sLengthMenu":     "Mostrar _MENU_ registros",
+            "sZeroRecords":    "No se encontraron resultados",
+            "sEmptyTable":     "Ningún dato disponible en esta tabla",
+            "sInfo":           "Mostrando registros del _START_ al _END_ de un total de _TOTAL_ registros",
+            "sInfoEmpty":      "Mostrando registros del 0 al 0 de un total de 0 registros",
+            "sInfoFiltered":   "(filtrado de un total de _MAX_ registros)",
+            "sInfoPostFix":    "",
+            "sSearch":         "Buscar:",
+            "sUrl":            "",
+            "sInfoThousands":  ",",
+            "sLoadingRecords": "Cargando...",
+            "oPaginate": {
+                "sFirst":    "Primero",
+                "sLast":     "Último",
+                "sNext":     "Siguiente",
+                "sPrevious": "Anterior"
+            },
+            "oAria": {
+                "sSortAscending":  ": Activar para ordenar la columna de manera ascendente",
+                "sSortDescending": ": Activar para ordenar la columna de manera descendente"
+            }
+        }
+        $('.confirma-eliminar').on('click', function () {
+            return confirm('¿Confirma que desea eliminar al estudiante?');
+        });
     </script>
 </body>
 
