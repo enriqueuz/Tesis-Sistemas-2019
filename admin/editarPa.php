@@ -48,8 +48,9 @@ if (isset($_GET['id']) && !empty($_GET['id'])) {
     unset($stmt);
 
     // Obtener los pagos:
-    $sql = "SELECT 
+    $sql2 = "SELECT 
         `pagos`.`id`,
+        `id_estudiante`,
         `referencia`,
         `monto`,
         `fecha`,
@@ -60,13 +61,13 @@ if (isset($_GET['id']) && !empty($_GET['id'])) {
     LIMIT 1";
 
     $pago = null;
-    if ($stmt = $pdo->prepare($sql)) {
-        $stmt->bindParam(":id_pago", $param_pagos, PDO::PARAM_STR);
+    if ($stmt2 = $pdo->prepare($sql2)) {
+        $stmt2->bindParam(":id_pago", $param_pagos, PDO::PARAM_STR);
         $param_pagos = $_GET['id'];
 
-        if ($stmt->execute()) {
-            if ($stmt->rowCount() > 0) {
-                while ($row = $stmt->fetch()) {
+        if ($stmt2->execute()) {
+            if ($stmt2->rowCount() > 0) {
+                while ($row = $stmt2->fetch()) {
                     $pago = $row;
                 }
             } else {
@@ -76,7 +77,7 @@ if (isset($_GET['id']) && !empty($_GET['id'])) {
             $error = 'Algo salió mal. Por favor intente más tarde.';
         }
     }
-    unset($stmt);
+    unset($stmt2);
 } else {
     // Garantizar que se está haciendo un POST a la página para que no hayan lazos de carga infinitos.
     if ($_SERVER["REQUEST_METHOD"] == "POST") {
@@ -87,6 +88,13 @@ if (isset($_GET['id']) && !empty($_GET['id'])) {
         } else {
             $error_msgs['id_pago'] = 'El ID del pago es requerido';
             $error_query[] = 'err_id_pago=1';
+        }
+
+        if (isset($_POST['id_estudiante']) && !empty($_POST['id_estudiante'])) {
+            $id_estudiante = $_POST['id_estudiante'];
+        } else {
+            $error_msgs['id_estudiante'] = 'El ID del estudiante es requerido';
+            $error_query[] = 'err_id_estudiante=1';
         }
 
         if (isset($_POST['referencia']) && !empty($_POST['referencia'])) {
@@ -103,25 +111,18 @@ if (isset($_GET['id']) && !empty($_GET['id'])) {
             $error_query[] = 'err_monto=1';
         }
 
-        if (isset($_POST['fecha']) && !empty($_POST['fecha'])) {
-            $fecha = $_POST['fecha'];
+        if (isset($_POST['fecha_pago']) && !empty($_POST['fecha_pago'])) {
+            $fecha = $_POST['fecha_pago'];
         } else {
-            $error_msgs['fecha'] = 'La fecha es requerida';
-            $error_query[] = 'err_fecha=1';
+            $error_msgs['fecha_pago'] = 'La fecha es requerida';
+            $error_query[] = 'err_fecha_pago=1';
         }
 
-        if (isset($_POST['tipo']) && !empty($_POST['tipo'])) {
-            $tipo = $_POST['tipo'];
+        if (isset($_POST['tipo_pago']) && !empty($_POST['tipo_pago'])) {
+            $tipo = $_POST['tipo_pago'];
         } else {
-            $error_msgs['tipo'] = 'El tipo es requerido';
-            $error_query[] = 'err_tipo=1';
-        }
-
-        if (isset($_POST['id_estudiante']) && !empty($_POST['id_estudiante'])) {
-            $id_estudiante = $_POST['id_estudiante'];
-        } else {
-            $error_msgs['id_estudiante'] = 'El ID del estudiante es requerido';
-            $error_query[] = 'err_id_estudiante=1';
+            $error_msgs['tipo_pago'] = 'El tipo es requerido';
+            $error_query[] = 'err_tipo_pago=1';
         }
 
         if (empty($error_msgs)) {
@@ -148,7 +149,7 @@ if (isset($_GET['id']) && !empty($_GET['id'])) {
                 if ($stmt_update_1->execute()) {
                     header("location: editarPa.php?exito_edicion=1&id={$id_pago}");
                 } else {
-                    echo "Algo salió mal. Por favor intente más tarde.";
+                    $error = "Algo salió mal. Por favor intente más tarde.";
                 }
             }
             unset($stmt_update_1);
@@ -161,7 +162,7 @@ unset($pdo);
 <html>
 
 <head>
-    <title>Registre un pago</title>
+    <title>Editar un pago</title>
     <meta charset="utf-8">
     <link rel="icon" type="image/jpg" href="../img/logo.jpg">
     <script type="text/javascript" src="../js/jquery-3.4.1.min.js"></script>
@@ -207,12 +208,13 @@ unset($pdo);
         <?php if (isset($_GET['exito_edicion']) && $_GET['exito_edicion'] == 1) : ?>
             <div class="alert alert-success">Se ha modificado el pago exitosamente.</div>
         <?php endif; ?>
+		<?php if( isset($error) && !empty($error) ): ?>
+        <div class="alert alert-warning py-2 col-lg-4 text-center"><?php echo $error; ?></div>
+        <?php endif; ?>
         <br>
         <form action="<?php echo htmlspecialchars($_SERVER["PHP_SELF"]); ?>" method="POST" name="fe" class="form-horizontal">
-            <input type="hidden" name="id_pago" value="<?php echo $pago['id_pago']; ?>">
-
+            <input type="hidden" name="id_pago" value="<?php echo $pago['id']; ?>">
             <div class="form-group">
-
                 <div class="form-group">
                     <div class="row">
                         <div class="col-lg-12">
@@ -220,7 +222,7 @@ unset($pdo);
                             <select id="idEstudiante" name="id_estudiante" class="form-control select2" required="required">
                                 <option>Seleccione un estudiante...</option>
                                 <?php foreach ($estudiantes as $id => $estudiante) : ?>
-                                    <option value="<?php echo $id; ?>">
+                                    <option value="<?php echo $id; ?>" <?php if(isset($pago['id_estudiante'])) { echo ($pago['id_estudiante'] == $id) ? 'selected="selected"' : ''; } ?>>
                                         <?php echo "{$estudiante['cedula']} - {$estudiante['nombre']} {$estudiante['apellido']} -  {$estudiante['carrera_nombre']}"; ?>
                                     </option>
                                 <?php endforeach; ?>

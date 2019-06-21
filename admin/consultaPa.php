@@ -59,6 +59,7 @@
                     <th>Correo</th>
                     <th>Teléfono</th>
                     <th>Tipo de pago</th>
+                    <th>Acciones</th>
                 </tr>
             </thead>
             <tbody>
@@ -84,15 +85,19 @@
                             if($stmt->rowCount() > 0){
                                 while($row = $stmt->fetch()){
                                     echo '<tr>'.PHP_EOL;
-                                    echo "\t<td>{$row['referencia']}</td>".PHP_EOL;
-                                    echo "\t<td>{$row['monto']}</td>".PHP_EOL;
-                                    echo "\t<td>{$row['fecha']}</td>".PHP_EOL;
-                                    echo "\t<td>{$row['nombre']}</td>".PHP_EOL;
-                                    echo "\t<td>{$row['apellido']}</td>".PHP_EOL;
-                                    echo "\t<td>{$row['cedula']}</td>".PHP_EOL;
-                                    echo "\t<td>{$row['correo']}</td>".PHP_EOL;
-                                    echo "\t<td>{$row['telefono']}</td>".PHP_EOL;
-                                    echo "\t<td>{$row['tipo']}</td>".PHP_EOL;
+                                    echo "<td>{$row['referencia']}</td>".PHP_EOL;
+                                    echo "<td>{$row['monto']}</td>".PHP_EOL;
+                                    echo "<td>{$row['fecha']}</td>".PHP_EOL;
+                                    echo "<td>{$row['nombre']}</td>".PHP_EOL;
+                                    echo "<td>{$row['apellido']}</td>".PHP_EOL;
+                                    echo "<td>{$row['cedula']}</td>".PHP_EOL;
+                                    echo "<td>{$row['correo']}</td>".PHP_EOL;
+                                    echo "<td>{$row['telefono']}</td>".PHP_EOL;
+                                    echo "<td>{$row['tipo']}</td>".PHP_EOL;
+                                    echo '<td>'.
+                                        "<a class='btn btn-info' href='editarPa.php?id={$row['id']}'>Editar</a>".
+                                        "<a class='btn btn-danger confirma-eliminar' href='eliminarPa.php?id={$row['id']}'>Eliminar</a>".
+                                    '</td>'.PHP_EOL;
                                     echo "</tr>".PHP_EOL;
                                 }
                             } else {
@@ -108,38 +113,39 @@
             </tbody>
         </table>
     </div><!--/.container-->
-        <script> 
-			$(document).ready(function() {
-		    $('#tablapagos').DataTable({
-		    	"language": idioma_espanol
-		    });
-		} );
-		var idioma_espanol = {
-		    "sProcessing":     "Procesando...",
-		    "sLengthMenu":     "Mostrar _MENU_ registros",
-		    "sZeroRecords":    "No se encontraron resultados",
-		    "sEmptyTable":     "Ningún dato disponible en esta tabla",
-		    "sInfo":           "Mostrando registros del _START_ al _END_ de un total de _TOTAL_ registros",
-		    "sInfoEmpty":      "Mostrando registros del 0 al 0 de un total de 0 registros",
-		    "sInfoFiltered":   "(filtrado de un total de _MAX_ registros)",
-		    "sInfoPostFix":    "",
-		    "sSearch":         "Buscar:",
-		    "sUrl":            "",
-		    "sInfoThousands":  ",",
-		    "sLoadingRecords": "Cargando...",
-		    "oPaginate": {
-		        "sFirst":    "Primero",
-		        "sLast":     "Último",
-		        "sNext":     "Siguiente",
-		        "sPrevious": "Anterior"
-		    },
-		    "oAria": {
-		        "sSortAscending":  ": Activar para ordenar la columna de manera ascendente",
-		        "sSortDescending": ": Activar para ordenar la columna de manera descendente"
-    }
-}
+    <script> 
+        $(document).ready(function() {
+            $('#tablapagos').DataTable({
+                "language": idioma_espanol
+            });
+        });
+        var idioma_espanol = {
+            "sProcessing":     "Procesando...",
+            "sLengthMenu":     "Mostrar _MENU_ registros",
+            "sZeroRecords":    "No se encontraron resultados",
+            "sEmptyTable":     "Ningún dato disponible en esta tabla",
+            "sInfo":           "Mostrando registros del _START_ al _END_ de un total de _TOTAL_ registros",
+            "sInfoEmpty":      "Mostrando registros del 0 al 0 de un total de 0 registros",
+            "sInfoFiltered":   "(filtrado de un total de _MAX_ registros)",
+            "sInfoPostFix":    "",
+            "sSearch":         "Buscar:",
+            "sUrl":            "",
+            "sInfoThousands":  ",",
+            "sLoadingRecords": "Cargando...",
+            "oPaginate": {
+                "sFirst":    "Primero",
+                "sLast":     "Último",
+                "sNext":     "Siguiente",
+                "sPrevious": "Anterior"
+            },
+            "oAria": {
+                "sSortAscending":  ": Activar para ordenar la columna de manera ascendente",
+                "sSortDescending": ": Activar para ordenar la columna de manera descendente"
+            }
+        }
+        $('.confirma-eliminar').on('click', function () {
+            return confirm('¿Confirma que desea eliminar el pago?');
+        });
     </script>
-
 </body>
-
 </html>

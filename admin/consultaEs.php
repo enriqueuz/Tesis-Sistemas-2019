@@ -87,15 +87,15 @@
                             if($stmt->rowCount() > 0){
                                 while($row = $stmt->fetch()){
                                     echo '<tr>'.PHP_EOL;
-                                    echo "\t<td>{$row['cedula']}</td>".PHP_EOL;
-                                    echo "\t<td>{$row['nombre']} {$row['apellido']}</td>".PHP_EOL;
-                                    echo "\t<td>". ((strtolower($row["sexo"]) == 'm') ? 'Masculino' : 'Femenino') .'</td>'.PHP_EOL;
-                                    echo "\t<td>{$row['correo']}</td>".PHP_EOL;
-                                    echo "\t<td>{$row['telefono']}</td>".PHP_EOL;
-                                    echo "\t<td>{$row['fecha_nacimiento']}</td>".PHP_EOL;
-                                    echo "\t<td>{$row['mencion_nombre']}</td>".PHP_EOL;
-                                    echo "\t<td>{$row['carrera_nombre']}</td>".PHP_EOL;
-                                    echo '\t<td>'.
+                                    echo "<td>{$row['cedula']}</td>".PHP_EOL;
+                                    echo "<td>{$row['nombre']} {$row['apellido']}</td>".PHP_EOL;
+                                    echo "<td>". ((strtolower($row["sexo"]) == 'm') ? 'Masculino' : 'Femenino') .'</td>'.PHP_EOL;
+                                    echo "<td>{$row['correo']}</td>".PHP_EOL;
+                                    echo "<td>{$row['telefono']}</td>".PHP_EOL;
+                                    echo "<td>{$row['fecha_nacimiento']}</td>".PHP_EOL;
+                                    echo "<td>{$row['mencion_nombre']}</td>".PHP_EOL;
+                                    echo "<td>{$row['carrera_nombre']}</td>".PHP_EOL;
+                                    echo '<td>'.
                                         "<a class='btn btn-info' href='verEs.php?id={$row['id']}'>Ver Datos</a>".
                                         "<a class='btn btn-danger confirma-eliminar' href='eliminarEs.php?id={$row['id']}'>Eliminar</a>".
                                     '</td>'.PHP_EOL;
