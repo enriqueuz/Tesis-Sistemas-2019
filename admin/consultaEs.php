@@ -50,7 +50,7 @@
     <div class="container">
 		<div class="row mt-5">
             <!-- Inicia tabla de consulta-->
-            <table id="tablaestudiantes" class="table">
+            <table id="tablaestudiantes" class="table table-bordered table-hover">
                 <thead>
                     <tr>
                         <th>Cédula</th>

@@ -47,7 +47,7 @@
     <div class="container">
         <br>
         <!-- Inicia tabla de consulta-->
-        <table id="tablapagos" class="table">
+        <table id="tablapagos" class="table table-bordered table-hover">
             <thead class="thead-dark">
                 <tr>
                     <th>Número de referencia</th>
