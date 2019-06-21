@@ -96,8 +96,8 @@
                                     echo "<td>{$row['mencion_nombre']}</td>".PHP_EOL;
                                     echo "<td>{$row['carrera_nombre']}</td>".PHP_EOL;
                                     echo '<td>'.
-                                        "<a class='btn btn-info' href='verEs.php?id={$row['id']}'>Ver Datos</a>".
-                                        "<a class='btn btn-danger confirma-eliminar' href='eliminarEs.php?id={$row['id']}'>Eliminar</a>".
+                                        "<a class='btn btn-info' href='verEs.php?id={$row['id']}' role='button'><i class='fa fa-search'></i> Ver Datos</a>".
+                                        "<a class='btn btn-danger confirma-eliminar' href='eliminarEs.php?id={$row['id']}' role='button'><i class='fa fa-times'></i> Eliminar</a>".
                                     '</td>'.PHP_EOL;
                                     echo "</tr>".PHP_EOL;
                                 }

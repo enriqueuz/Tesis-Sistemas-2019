@@ -255,12 +255,12 @@ unset($pdo);
                         <div class="col-sm">
                             <label for="tipo_pago">Tipo de pago</label>
                             <select id="tipo_pago" name="tipo_pago" class="form-control select2">
-                                <option value="inscripcion" <?php echo ($pago['tipo'] == 'pago_inscripcion') ? 'selected="selected"' : ''; ?>>Inscripción</option>
-                                <option value="t1" <?php echo ($pago['tipo'] == 'pago_t1') ? 'selected="selected"' : ''; ?>>Primer trimestre</option>
-                                <option value="t2" <?php echo ($pago['tipo'] == 'pago_t2') ? 'selected="selected"' : ''; ?>>Segundo trimestre</option>
-                                <option value="t3" <?php echo ($pago['tipo'] == 'pago_t3') ? 'selected="selected"' : ''; ?>>Tercer trimestre</option>
-                                <option value="t4" <?php echo ($pago['tipo'] == 'pago_t4') ? 'selected="selected"' : ''; ?>>Cuarto trimestre</option>
-                                <option value="mg" <?php echo ($pago['tipo'] == 'pago_mg') ? 'selected="selected"' : ''; ?>>Memoria de grado</option>
+                                <option value="inscripcion" <?php echo ($pago['tipo'] == 'inscripcion') ? 'selected="selected"' : ''; ?>>Inscripción</option>
+                                <option value="t1" <?php echo ($pago['tipo'] == 't1') ? 'selected="selected"' : ''; ?>>Primer trimestre</option>
+                                <option value="t2" <?php echo ($pago['tipo'] == 't2') ? 'selected="selected"' : ''; ?>>Segundo trimestre</option>
+                                <option value="t3" <?php echo ($pago['tipo'] == 't3') ? 'selected="selected"' : ''; ?>>Tercer trimestre</option>
+                                <option value="t4" <?php echo ($pago['tipo'] == 't4') ? 'selected="selected"' : ''; ?>>Cuarto trimestre</option>
+                                <option value="mg" <?php echo ($pago['tipo'] == 'mg') ? 'selected="selected"' : ''; ?>>Memoria de grado</option>
                             </select>
                         </div>
                     </div>
