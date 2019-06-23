@@ -28,7 +28,7 @@
                     <li class="nav-item"><a class="nav-link text-light" href="../../consultaEs.php">Consulte la información
 							de un estudiante</a></li>
                     <li class="nav-item"><a class="nav-link text-light" href="../../registroPa.php">Registre un pago</a></li>
-                    <li class="nav-item"><a class="nav-link text-light disabled" href="../../consultaPa.php">Consulte un
+                    <li class="nav-item"><a class="nav-link text-light" href="../../consultaPa.php">Consulte un
 							pago</a></li>
                 </ul>
             <!--
@@ -42,11 +42,15 @@
     </header>
 
     <h1>Consulte la información de las carreras registradas</h1>
+    <br>
     <div class="container">
         <br>
         <?php if( isset($_GET['eliminado']) && $_GET['eliminado'] == 1): ?>
         <div class="alert alert-success">Se ha eliminado la carrera exitosamente.</div>
+		<?php elseif( isset($_GET['error']) && $_GET['error'] == 1): ?>
+        <div class="alert alert-warning">Existen estudiantes asociados a esta carrera</div>
         <?php endif; ?>
+        <button class="btn btn-secondary" onclick="window.location.href='../admin/carreras/crearCarrera.php'">Crear carrera</button><br><br>
         <!-- Inicia tabla de consulta-->
         <table class="table">
             <thead class="thead-dark">
@@ -77,7 +81,7 @@
                                     echo "\t<td>{$row['nombre_mencion']}</td>".PHP_EOL;
                                     echo "\t<td>{$row['nombre']}</td>".PHP_EOL;
                                     echo "\t<td>".
-                                        '<a href="editarCarrera.php?id='.$row["id"].'" class="btn btn-info" role="button">Editar</a>'.
+                                        /*'<a href="editarCarrera.php?id='.$row["id"].'" class="btn btn-info" role="button">Editar</a>'.*/
                                         '<a href="borrarCarrera.php?id='.$row["id"].'" class="btn btn-danger confirma-carrera" role="button">Eliminar</a>'
                                     ."</td>".PHP_EOL;
                                     echo "</tr>".PHP_EOL;
