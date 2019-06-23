@@ -222,6 +222,10 @@ unset($pdo);
     </header>
     <!-- Inicia formulario de chequeo de pagos-->
     <h1>Chequee los pagos de un estudiante</h1>
+    <br>
+    <?php if( isset($_GET['reiniciados']) && $_GET['reiniciados'] == 1): ?>
+    <div class="alert alert-success container py-2 col-lg-4" align="center">Se reiniciaron los chequeos exitosamente</div>
+    <?php endif; ?>
     <div class="container py-5">
         <br>
         <form action="<?php echo htmlspecialchars($_SERVER["PHP_SELF"]); ?>" method="POST" name="buscar_usuario" class="form">
@@ -231,7 +235,7 @@ unset($pdo);
                         <div class="col-sm">
                             <label for="id_estudiante" class="col-form-label-md">Estudiante:</label>
                             <select id="idEstudiante" name="id_estudiante" class="form-control select2" required="required">
-                                <option>Seleccione un estudiante...</option>
+                                <option>Busque aquí un estudiante...</option>
                                 <?php foreach ($estudiantes as $id => $estudiante) : ?>
                                     <option value="<?php echo $id; ?>" <?php if(isset($id_estudiante)) { echo ($id_estudiante == $id) ? 'selected="selected"' : ''; } ?>>
                                         <?php echo "{$estudiante['cedula']} - {$estudiante['nombre']} {$estudiante['apellido']} -  {$estudiante['carrera_nombre']}"; ?>
@@ -241,7 +245,7 @@ unset($pdo);
                         </div>
 
                         <div class="col-sm">
-                            <input type="submit" name="buscar" class="btn btn-success" value="Buscar">
+                            <input type="submit" name="buscar" class="btn btn-success" value="Confime aquí una vez haya seleccionado">
                         </div>
                     </div>
                 </div>
@@ -328,6 +332,7 @@ unset($pdo);
                 <input type="submit" class="btn btn-primary" name="registrar" value="Registrar pagos">
             </div>
         </form>
+        <button class="btn btn-danger" onclick="window.location.href='../admin/reiniciarCP.php'">Reiniciar chequeos de trimestres</button>
     </div>
     <script>
         $( document ).ready(function() {
