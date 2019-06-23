@@ -11,6 +11,15 @@
     <script type="text/javascript" src="../js/bootstrap.min.js"></script>
     <script type="text/javascript" src="../js/jquery.dataTables.min.js"></script>
     <link rel="stylesheet" type="text/css" href="../css/bootstrap.min.css">
+    <link rel="stylesheet" type="text/css" href="../css/dataTables.bootstrap.min.css">
+    <link rel="stylesheet" type="text/css" href="../css/responsive.bootstrap.min.css">
+    <script type="text/javascript" language="javascript" src="../js/dataTables.bootstrap.min.js"></script>
+    <script type="text/javascript" language="javascript" src="../js/dataTables.responsive.min.js"></script>
+    <script type="text/javascript" language="javascript" src="../js/responsive.bootstrap.min.js"></script>
+    <link rel="stylesheet" type="text/css" href="../css/bootstrapdt.min.css">
+    
+    
+
 </head>
 
 <body>
@@ -44,14 +53,18 @@
     </header>
 
     <h1>Consulte los pagos realizados</h1>
+    <br>
+	<?php if( isset($_GET['eliminado']) && $_GET['eliminado'] == 1): ?>
+    <div class="alert alert-success container py-2 col-lg-4" align="center">Se eliminó exitosamente el pago</div>
+    <?php endif; ?>
     <div class="container">
         <br>
         <!-- Inicia tabla de consulta-->
-        <table id="tablapagos" class="table table-bordered table-hover">
+        <table id="tablapagos" class="table table-bordered table-hover table-hover">
             <thead class="thead-dark">
                 <tr>
                     <th>Número de referencia</th>
-                    <th>Monto total</th>
+                    <th>Monto total (Bs.)</th>
                     <th>Fecha de pago</th>
                     <th>Nombre</th>
                     <th>Apellido</th>
