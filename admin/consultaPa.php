@@ -10,16 +10,12 @@
     <script type="text/javascript" src="../js/jquery-3.4.1.min.js"></script>
     <script type="text/javascript" src="../js/bootstrap.min.js"></script>
     <script type="text/javascript" src="../js/jquery.dataTables.min.js"></script>
+    <script type="text/javascript" src="../js/dataTables.bootstrap4.min.js"></script>
+    <script type="text/javascript" src="../js/dataTables.responsive.min.js"></script>
+    <script type="text/javascript" src="../js/responsive.bootstrap4.min.js"></script>
     <link rel="stylesheet" type="text/css" href="../css/bootstrap.min.css">
-    <link rel="stylesheet" type="text/css" href="../css/dataTables.bootstrap.min.css">
-    <link rel="stylesheet" type="text/css" href="../css/responsive.bootstrap.min.css">
-    <script type="text/javascript" language="javascript" src="../js/dataTables.bootstrap.min.js"></script>
-    <script type="text/javascript" language="javascript" src="../js/dataTables.responsive.min.js"></script>
-    <script type="text/javascript" language="javascript" src="../js/responsive.bootstrap.min.js"></script>
-    <link rel="stylesheet" type="text/css" href="../css/bootstrapdt.min.css">
-    
-    
-
+    <link rel="stylesheet" type="text/css" href="../css/dataTables.bootstrap4.min.css">
+    <link rel="stylesheet" type="text/css" href="../css/responsive.bootstrap4.min.css"> 
 </head>
 
 <body>
@@ -60,7 +56,7 @@
     <div class="container">
         <br>
         <!-- Inicia tabla de consulta-->
-        <table id="tablapagos" class="table table-bordered table-hover table-hover">
+        <table id="tablapagos" class="table table-bordered table-hover table-hover dt-responsive nowrap">
             <thead class="thead-dark">
                 <tr>
                     <th>Número de referencia</th>
