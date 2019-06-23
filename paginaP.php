@@ -49,10 +49,15 @@
                 <button class="btn btn-secondary" onclick="window.location.href='consultaEs.php'">Consultar información de un estudiante</button>
                 <button class="btn btn-secondary" onclick="window.location.href='registroPa.php'">Registrar un pago</button>
                 <button class="btn btn-secondary" onclick="window.location.href='consultaPa.php'">Consultar pagos</button>
+                <button class="btn btn-secondary" onclick="window.location.href='chequeoPaSesion.php'">Chequear pagos</button>
+                <button class="btn btn-secondary" onclick="window.location.href='Carreras.php'">Gestionar carreras</button>
                 <button class="btn btn-secondary" onclick="window.location.href='salir.php'">Salir del sistema</button>
+
             </nav>
         </div>
     </div>
+
+
 </body>
 
 </html>
