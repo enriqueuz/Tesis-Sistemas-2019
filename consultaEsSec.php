@@ -8,7 +8,14 @@
     <link rel="icon" type="image/jpg" href="img/logo.jpg">
     <script type="text/javascript" src="js/jquery-3.4.1.min.js"></script>
     <script type="text/javascript" src="js/bootstrap.min.js"></script>
+    <script type="text/javascript" src="js/jquery.dataTables.min.js"></script>
     <link rel="stylesheet" type="text/css" href="css/bootstrap.min.css">
+	<link rel="stylesheet" type="text/css" href="css/dataTables.bootstrap.min.css">
+    <link rel="stylesheet" type="text/css" href="css/responsive.bootstrap.min.css">
+    <script type="text/javascript" language="javascript" src="js/dataTables.bootstrap.min.js"></script>
+    <script type="text/javascript" language="javascript" src="js/dataTables.responsive.min.js"></script>
+    <script type="text/javascript" language="javascript" src="js/responsive.bootstrap.min.js"></script>
+    <link rel="stylesheet" type="text/css" href="css/bootstrapdt.min.css">
 </head>
 
 <body>
@@ -24,7 +31,7 @@
                 <ul class="navbar-nav mr-auto">
                     <li class="nav-item"><a class="nav-link text-light disabled" href="registroEs.php">Registre un
 							estudiante</a></li>
-                    <li class="nav-item"><a class="nav-link disabled text-light" href="../consultaEs.php">Consulte la
+                    <li class="nav-item"><a class="nav-link disabled text-light" href="consultaEs.php">Consulte la
 							información de un estudiante</a></li>
                     <li class="nav-item"><a class="nav-link text-light disabled" href="registroPa.php">Registre un pago</a></li>
                     <li class="nav-item"><a class="nav-link text-light" href="consultaPa.php">Consulte un pago</a></li>
@@ -43,7 +50,7 @@
     <div class="container">
 		<div class="row mt-5">
             <!-- Inicia tabla de consulta-->
-            <table class="table">
+            <table id="example" class="table table-bordered table-striped">
                 <thead>
                     <tr>
                         <th>Cédula</th>
@@ -52,8 +59,8 @@
                         <th>Correo</th>
                         <th>Teléfono</th>
                         <th>Fecha de nacimiento</th>
-                        <th>Título universitario</th>
                         <th>Mención</th>
+                        <th>Título universitario</th>
                         <th>Acciones</th>
                     </tr>
                 </thead>
@@ -105,6 +112,38 @@
             </table>
         </div><!--/.row-->
     </div><!--/.container-->
+    <br>
+    <script> 
+			$(document).ready(function() {
+		    $('#example').DataTable({
+		    	"language": idioma_espanol
+		    });
+		} );
+		var idioma_espanol = {
+		    "sProcessing":     "Procesando...",
+		    "sLengthMenu":     "Mostrar _MENU_ registros",
+		    "sZeroRecords":    "No se encontraron resultados",
+		    "sEmptyTable":     "Ningún dato disponible en esta tabla",
+		    "sInfo":           "Mostrando registros del _START_ al _END_ de un total de _TOTAL_ registros",
+		    "sInfoEmpty":      "Mostrando registros del 0 al 0 de un total de 0 registros",
+		    "sInfoFiltered":   "(filtrado de un total de _MAX_ registros)",
+		    "sInfoPostFix":    "",
+		    "sSearch":         "Buscar:",
+		    "sUrl":            "",
+		    "sInfoThousands":  ",",
+		    "sLoadingRecords": "Cargando...",
+		    "oPaginate": {
+		        "sFirst":    "Primero",
+		        "sLast":     "Último",
+		        "sNext":     "Siguiente",
+		        "sPrevious": "Anterior"
+		    },
+		    "oAria": {
+		        "sSortAscending":  ": Activar para ordenar la columna de manera ascendente",
+		        "sSortDescending": ": Activar para ordenar la columna de manera descendente"
+    }
+}
+    </script>
 </body>
 
 </html>
