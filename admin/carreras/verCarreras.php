@@ -37,7 +37,7 @@
                 			<a class="dropdown-item" href="../consultaPa.php">Consulte un pago</a>
                 		</div>
                 	</li> 
-                	<li class="nav-item"><a class="nav-link text-light" href="../admin/ChequeoPa.php">Chequear pagos</a></li>
+                	<li class="nav-item"><a class="nav-link text-light" href="../ChequeoPa.php">Chequear pagos</a></li>
                 	<li class="nav-item"><a class="nav-link text-light" href="../carreras/verCarreras.php">Carreras</a></li>
 					<li class="nav-item"><a class="nav-link text-light" href="../registroUs.php">Usuario nuevo</a></li>
                 </ul>

@@ -92,7 +92,7 @@ if($_SERVER["REQUEST_METHOD"] == "POST") {
 
             <header>
         <nav class="navbar navbar-expand-lg navbar-light" style="background-color: #AAA9AB">
-            <a class="navbar-brand" href="../paginaP.php">Programa de Profesionalización Docente de la ULA</a>
+            <a class="navbar-brand" href="../../paginaP.php">Programa de Profesionalización Docente de la ULA</a>
             <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
                 <span class="navbar-toggler-icon"></span>
             </button>
@@ -113,9 +113,9 @@ if($_SERVER["REQUEST_METHOD"] == "POST") {
                 			<a class="dropdown-item" href="../consultaPa.php">Consulte un pago</a>
                 		</div>
                 	</li> 
-                	<li class="nav-item"><a class="nav-link text-light" href="../admin/ChequeoPa.php">Chequear pagos</a></li>
-                	<li class="nav-item"><a class="nav-link text-light" href="../admin/carreras/verCarreras.php">Carreras</a></li>
-					<li class="nav-item"><a class="nav-link text-light" href="../admin/registroUs.php">Usuario nuevo</a></li>
+                	<li class="nav-item"><a class="nav-link text-light" href="../ChequeoPa.php">Chequear pagos</a></li>
+                	<li class="nav-item"><a class="nav-link text-light" href="../carreras/verCarreras.php">Carreras</a></li>
+					<li class="nav-item"><a class="nav-link text-light" href="../registroUs.php">Usuario nuevo</a></li>
                 </ul>
             <!--
                 <form class="form-inline my-2 my-lg-0">
