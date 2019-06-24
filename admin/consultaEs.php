@@ -23,19 +23,29 @@
     <header>
         <nav class="navbar navbar-expand-lg navbar-light" style="background-color: #AAA9AB">
             <a class="navbar-brand" href="../paginaP.php">Programa de Profesionalización Docente de la ULA</a>
-            <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="falsse" aria-label="Toggle navigation">
+            <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
                 <span class="navbar-toggler-icon"></span>
             </button>
 
             <div class="collapse navbar-collapse" id="navbarSupportedContent">
                 <ul class="navbar-nav mr-auto">
-                    <li class="nav-item"><a class="nav-link text-light" href="../registroEs.php">Registre un
-							estudiante</a></li>
-                    <li class="nav-item"><a class="nav-link disabled text-light" href="../consultaEs.php">Consulte la
-							información de un estudiante</a></li>
-                    <li class="nav-item"><a class="nav-link text-light" href="../registroPa.php">Registre un pago</a></li>
-                    <li class="nav-item"><a class="nav-link text-light" href="../consultaPa.php">Consulte un pago</a></li>
-                    <li class="nav-item"><a class="nav-link text-light" href="../admin/registroUs.php">Usuario nuevo</a></li>
+                	<li class="nav-item dropdown">
+                		<a class="nav-link dropdown-toggle text-light" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">Estudiantes</a>
+                		<div class="dropdown-menu" aria-labelledby="navbarDropdown"> 
+                			<a class="dropdown-item" href="../registroEs.php">Registre un estudiante</a>
+                			<a class="dropdown-item" href="../consultaEs.php">Consulte un estudiante</a>
+                		</div>
+                	</li>
+                	<li class="nav-item dropdown">
+                		<a class="nav-link dropdown-toggle text-light" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">Pagos</a>
+                		<div class="dropdown-menu" aria-labelledby="navbarDropdown"> 
+                			<a class="dropdown-item" href="../registroPa.php">Registre un pago</a>
+                			<a class="dropdown-item" href="../consultaPa.php">Consulte un pago</a>
+                		</div>
+                	</li> 
+                	<li class="nav-item"><a class="nav-link text-light" href="../admin/ChequeoPa.php">Chequear pagos</a></li>
+                	<li class="nav-item"><a class="nav-link text-light" href="../admin/carreras/verCarreras.php">Carreras</a></li>
+					<li class="nav-item"><a class="nav-link text-light" href="../admin/registroUs.php">Usuario nuevo</a></li>
                 </ul>
             <!--
                 <form class="form-inline my-2 my-lg-0">
@@ -48,14 +58,13 @@
     </header>
 
     <h1>Consulte la información de un estudiante</h1>
-    <br>
     <?php if( isset($_GET['eliminado']) && $_GET['eliminado'] == 1): ?>
     <div class="alert alert-success container py-2 col-lg-4" align="center">Se eliminó exitosamente al estudiante</div>
     <?php endif; ?>
     <div class="container">
 		<div class="row mt-5">
             <!-- Inicia tabla de consulta-->
-            <table id="tablaestudiantes" class="table table-bordered table-hover dt-responsive nowrap">
+            <table id="tablaestudiantes" class="table table-bordered table-hover">
                 <thead>
                     <tr>
                         <th>Cédula</th>
@@ -101,7 +110,7 @@
                                     echo "<td>{$row['mencion_nombre']}</td>".PHP_EOL;
                                     echo "<td>{$row['carrera_nombre']}</td>".PHP_EOL;
                                     echo '<td>'.
-                                        "<a class='btn btn-info' href='verEs.php?id={$row['id']}' role='button'><i class='fa fa-search'></i> Ver Datos</a>".
+                                        "<a class='btn btn-info' href='verEs.php?id={$row['id']}' role='button'><i class='fa fa-search'></i>Ver Datos</a>".
                                         "<a class='btn btn-danger confirma-eliminar' href='eliminarEs.php?id={$row['id']}' role='button'><i class='fa fa-times'></i> Eliminar</a>".
                                     '</td>'.PHP_EOL;
                                     echo "</tr>".PHP_EOL;

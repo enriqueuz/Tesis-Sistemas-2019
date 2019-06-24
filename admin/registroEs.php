@@ -40,18 +40,30 @@
 
     <header>
         <nav class="navbar navbar-expand-lg navbar-light" style="background-color: #AAA9AB">
-              <a class="navbar-brand" href="../paginaP.php">Programa de Profesionalización Docente de la ULA</a>
-              <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="falsse" aria-label="Toggle navigation">
+            <a class="navbar-brand" href="../paginaP.php">Programa de Profesionalización Docente de la ULA</a>
+            <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
                 <span class="navbar-toggler-icon"></span>
-              </button>
+            </button>
 
             <div class="collapse navbar-collapse" id="navbarSupportedContent">
                 <ul class="navbar-nav mr-auto">
-                      <li class="nav-item"><a class="nav-link disabled text-light" href="../registroEs.php">Registre un estudiante</a></li>
-                       <li class="nav-item"><a class="nav-link text-light" href="../consultaEs.php">Consulte la información de un estudiante</a></li>
-                       <li class="nav-item"><a class="nav-link text-light" href="../registroPa.php">Registre un pago</a></li>
-                       <li class="nav-item"><a class="nav-link text-light" href="../consultaPa.php">Consulte un pago</a></li>
-                       <li class="nav-item"><a class="nav-link text-light" href="../admin/registroUs.php">Usuario nuevo</a></li>
+                	<li class="nav-item dropdown">
+                		<a class="nav-link dropdown-toggle text-light" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">Estudiantes</a>
+                		<div class="dropdown-menu" aria-labelledby="navbarDropdown"> 
+                			<a class="dropdown-item" href="../registroEs.php">Registre un estudiante</a>
+                			<a class="dropdown-item" href="../consultaEs.php">Consulte un estudiante</a>
+                		</div>
+                	</li>
+                	<li class="nav-item dropdown">
+                		<a class="nav-link dropdown-toggle text-light" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">Pagos</a>
+                		<div class="dropdown-menu" aria-labelledby="navbarDropdown"> 
+                			<a class="dropdown-item" href="../registroPa.php">Registre un pago</a>
+                			<a class="dropdown-item" href="../consultaPa.php">Consulte un pago</a>
+                		</div>
+                	</li> 
+                	<li class="nav-item"><a class="nav-link text-light" href="../admin/ChequeoPa.php">Chequear pagos</a></li>
+                	<li class="nav-item"><a class="nav-link text-light" href="../admin/carreras/verCarreras.php">Carreras</a></li>
+					<li class="nav-item"><a class="nav-link text-light" href="../admin/registroUs.php">Usuario nuevo</a></li>
                 </ul>
             <!--
                 <form class="form-inline my-2 my-lg-0">
@@ -59,7 +71,7 @@
                     <button class="btn btn-outline-success my-2 my-sm-0" type="submit">Search</button>
                 </form>
             -->
-          </div>
+            </div>
         </nav>
     </header>
 
@@ -67,22 +79,39 @@
 
     <h1>Registre un estudiante</h1>
 
-    <br>
     <div class="container py-5">
-        <br> 
+		<?php if( isset($_GET['exito']) && $_GET['exito'] == 1): ?>
+        <div class="alert alert-success py-2 col-lg-5" align="center">Se ha registrado el estudiante exitosamente.</div>
+        <?php elseif( isset($_GET['err_nombre']) && $_GET['err_nombre'] == 1): ?>
+        <div class="alert alert-warning py-2 col-lg-3" align="center">Ingrese el nombre del estudiante.</div>
+		<?php elseif( isset($_GET['err_apellido']) && $_GET['err_apellido'] == 1): ?>
+        <div class="alert alert-warning py-2 col-lg-3" align="center">Ingrese el apellido del estudiante.</div>
+		<?php elseif( isset($_GET['err_cedula']) && $_GET['err_cedula'] == 1): ?>
+        <div class="alert alert-warning py-2 col-lg-3" align="center">Ingrese la cédula del estudiante.</div>
+		<?php elseif( isset($_GET['err_telefono']) && $_GET['err_telefono'] == 1): ?>
+        <div class="alert alert-warning py-2 col-lg-3" align="center">Ingrese el teléfono del estudiante.</div>
+		<?php elseif( isset($_GET['err_sexo']) && $_GET['err_sexo'] == 1): ?>
+        <div class="alert alert-warning py-2 col-lg-3" align="center">Seleccione el sexo del estudiante.</div>
+       	<?php elseif( isset($_GET['cedulaRep']) && $_GET['cedulaRep'] == 1): ?>
+        <div class="alert alert-warning py-2 col-lg-3" align="center">El número de cédula ya existe</div>
+       	<?php elseif( isset($_GET['faltaCa']) && $_GET['faltaCa'] == 1): ?>
+        <div class="alert alert-warning py-2 col-lg-3" align="center">Seleccione mención y carrera del estudiante</div>
+        <?php endif; ?>
         <form action="procesarRE.php" method="POST" name="fe" class="form-horizontal"> 
 
             <div class="form-group">
+            	<br>
                 <h2>Datos personales</h2>
+                <br>
                 <div class="row">
                     <div class="col-sm">					
                         <label for="nombre">Nombre</label>
-                        <input type="text" name="nombre" class="form-control">
+                        <input type="text" name="nombre" class="form-control" required="required">
                     </div>
 
                     <div class="col-sm">					
                         <label for="apellido">Apellido</label>
-                        <input type="text" name="apellido" class="form-control">
+                        <input type="text" name="apellido" class="form-control" required="required">
                     </div>
                 </div>
                 <br>
@@ -91,18 +120,18 @@
                     <div class="row">
                         <div class="col-sm">
                             <label for="cedula">Cédula de identidad</label>
-                            <input type="number" name="cedula" class="form-control">
+                            <input type="number" name="cedula" class="form-control" required="required">
                         </div>	
                         
                         <div class="col-sm">
                             <label for="telefono">Número de teléfono</label>
-                            <input type="tel" name="telefono" class="form-control">
+                            <input type="tel" name="telefono" class="form-control" required="required">
                         </div>
 
                         <div class="col-sm" align="center">
                             <label for="sexo" class="form-check-label">Sexo</label><br><br>
                             <div class="form-check form-check-inline">
-                                <input type="radio" name="sexo" value="m"> Masculino
+                                <input type="radio" name="sexo" value="m" required="required"> Masculino
                             </div>
                             <div class="form-check form-check-inline">
                                 <input type="radio" name="sexo" value="f"> Femenino
@@ -116,11 +145,11 @@
                     <div class="row">
                         <div class="col-sm">	
                             <label for="correo">Correo electrónico</label>
-                            <input type="email" name="correo" class="form-control">
+                            <input type="email" name="correo" class="form-control" required="required">
                         </div>
                         <div class="col-sm">
                             <label for="fecha_nacimiento">Fecha de nacimiento</label>
-                            <input type="date" name="fecha_nacimiento" class="form-control">
+                            <input type="date" name="fecha_nacimiento" class="form-control" required="required">
                         </div>	
                     </div>
                 </div>			
@@ -136,6 +165,8 @@
                             <?php endforeach; ?>
                             </select>
                         </div>
+
+
                         <div class="col-sm">
                             <label for="carrera">Título universitario</label>
                             <select name="carrera" class="form-control select-carrera">
@@ -267,6 +298,7 @@
             </div>
 
         </form>
+        <button class="btn btn-secondary" onclick="window.location.href='../admin/carreras/crearCarrera.php'">Crear carrera</button>
 
     </div>
     <script>
@@ -282,12 +314,14 @@
                             text : 'Seleccione una opcion...'
                         }));
                         $.each(data.result, function (i, item) {
+                            console.log('i, item:', i, item);
+                            console.log('item.id:',item.id);
+                            console.log('item.nombre:', item.nombre);
                             $('.select-carrera').append($('<option>', { 
                                 value: item.id,
                                 text : item.nombre 
                             }));
                         });
-                        $('.select-carrera').trigger('change');
                     }
                 });
         });

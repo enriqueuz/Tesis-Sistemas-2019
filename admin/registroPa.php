@@ -70,31 +70,46 @@
 
             <div class="collapse navbar-collapse" id="navbarSupportedContent">
                 <ul class="navbar-nav mr-auto">
-                    <li class="nav-item"><a class="nav-link text-light" href="../registroEs.php">Registre un
-							estudiante</a></li>
-                    <li class="nav-item"><a class="nav-link text-light" href="../consultaEs.php">Consulte la información
-							de un estudiante</a></li>
-                    <li class="nav-item"><a class="nav-link disabled text-light" href="../registroPa.php">Registre un
-							pago</a></li>
-                    <li class="nav-item"><a class="nav-link text-light" href="../consultaPa.php">Consulte un pago</a></li>
-                    <li class="nav-item"><a class="nav-link text-light" href="../admin/registroUs.php">Usuario nuevo</a></li>
+                	<li class="nav-item dropdown">
+                		<a class="nav-link dropdown-toggle text-light" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">Estudiantes</a>
+                		<div class="dropdown-menu" aria-labelledby="navbarDropdown"> 
+                			<a class="dropdown-item" href="../registroEs.php">Registre un estudiante</a>
+                			<a class="dropdown-item" href="../consultaEs.php">Consulte un estudiante</a>
+                		</div>
+                	</li>
+                	<li class="nav-item dropdown">
+                		<a class="nav-link dropdown-toggle text-light" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">Pagos</a>
+                		<div class="dropdown-menu" aria-labelledby="navbarDropdown"> 
+                			<a class="dropdown-item" href="../registroPa.php">Registre un pago</a>
+                			<a class="dropdown-item" href="../consultaPa.php">Consulte un pago</a>
+                		</div>
+                	</li> 
+                	<li class="nav-item"><a class="nav-link text-light" href="../admin/ChequeoPa.php">Chequear pagos</a></li>
+                	<li class="nav-item"><a class="nav-link text-light" href="../admin/carreras/verCarreras.php">Carreras</a></li>
+					<li class="nav-item"><a class="nav-link text-light" href="../admin/registroUs.php">Usuario nuevo</a></li>
                 </ul>
-                <!--
-					<form class="form-inline my-2 my-lg-0">
-                        <input class="form-control mr-sm-2" type="search" placeholder="Search" aria-label="Search">
-                        <button class="btn btn-outline-success my-2 my-sm-0" type="submit">Search</button>
-					</form>
-				-->
+            <!--
+                <form class="form-inline my-2 my-lg-0">
+                    <input class="form-control mr-sm-2" type="search" placeholder="Search" aria-label="Search">
+                    <button class="btn btn-outline-success my-2 my-sm-0" type="submit">Search</button>
+                </form>
+            -->
             </div>
         </nav>
     </header>
 
+
     <h1>Registre un pago</h1>
-    <br>
+    
     <div class="container py-5">
         <?php if( isset($_GET['exito']) && $_GET['exito'] == 1): ?>
-        <div class="alert alert-success">Se ha registrado el pago exitosamente.</div>
+        <div class="alert alert-success py-2 col-lg-4" align="center">Se ha registrado el pago exitosamente.</div>
+       	<?php elseif( isset($_GET['referenciaRep']) && $_GET['referenciaRep'] == 1): ?>
+        <div class="alert alert-warning py-2 col-lg-3" align="center">El número de referencia ya existe</div>
+       	<?php elseif( isset($_GET['selecEs']) && $_GET['selecEs'] == 1): ?>
+        <div class="alert alert-warning py-2 col-lg-3" align="center">Seleccione un estudiante</div>
         <?php endif; ?>
+
         <br>
         <form action="procesarPa.php" method="POST" name="fe" class="form-horizontal">
 
@@ -102,7 +117,7 @@
 
                 <div class="form-group">
                     <div class="row">
-                        <div class="col-lg-12">
+                        <div class="col-lg-6">
                             <label for="referencia">Estudiante</label>
                             <select id="idEstudiante" name="id_estudiante" class="form-control select2" required="required">
                                 <option>Seleccione un estudiante...</option>
@@ -120,12 +135,12 @@
                     <div class="row">
                         <div class="col-sm">
                             <label for="referencia">Número de referencia</label>
-                            <input type="number" name="referencia" class="form-control">
+                            <input type="number" name="referencia" class="form-control" required="required">
                         </div>
 
                         <div class="col-sm">
                             <label for="monto">Monto total</label>
-                            <input type="number" name="monto" class="form-control">
+                            <input type="number" name="monto" class="form-control" required="required">
                         </div>
                     </div>
                 </div>
@@ -134,12 +149,12 @@
                     <div class="row">
                         <div class="col-sm">
                             <label for="fecha_pago">Fecha de pago</label>
-                            <input type="date" name="fecha_pago" class="form-control">
+                            <input type="date" name="fecha_pago" class="form-control" required="required">
                         </div>
 
                         <div class="col-sm">
                             <label for="tipo_pago">Tipo de pago</label>
-                            <select id="tipo_pago" name="tipo_pago" class="form-control select2">
+                            <select id="tipo_pago" name="tipo_pago" class="form-control select2" required="required">
                                 <option value="inscripcion">Inscripción</option>
                                 <option value="t1">Primer trimestre</option>
                                 <option value="t2">Segundo trimestre</option>
