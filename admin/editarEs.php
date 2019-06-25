@@ -596,7 +596,7 @@ $conexion=mysqli_connect("localhost","root","12345678","ppd");
         });
         $( document ).ready(function() {
             $( ".select2" ).select2({
-                theme: "bootstrap"
+                theme: "bootstrap4"
             });
         });
     </script>
