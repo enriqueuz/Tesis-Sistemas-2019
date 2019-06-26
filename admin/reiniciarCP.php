@@ -3,7 +3,7 @@
 
 <?php  
 
-
+    // OJO: Esto reinicia los chequeos para todo el mundo, no solo para el estudiante que estás viendo.
 	$sql3 = "UPDATE `chequeo_pagos`
 	            SET
 	                `pago_t1`=0,
