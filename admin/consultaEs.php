@@ -61,6 +61,9 @@
     <?php if( isset($_GET['eliminado']) && $_GET['eliminado'] == 1): ?>
     <div class="alert alert-success container py-2 col-lg-4" align="center">Se eliminó exitosamente al estudiante</div>
     <?php endif; ?>
+    <?php if( isset($_GET['error']) && $_GET['error'] == 1): ?>
+    <div class="alert alert-danger container py-2 col-lg-4" align="center">No se especificó un estudiante</div>
+    <?php endif; ?>
     <div class="container">
 		<div class="row mt-5">
             <!-- Inicia tabla de consulta-->
@@ -111,6 +114,7 @@
                                     echo "<td>{$row['carrera_nombre']}</td>".PHP_EOL;
                                     echo '<td>'.
                                         "<a class='btn btn-info' href='verEs.php?id={$row['id']}' role='button'><i class='fa fa-search'></i>Ver Datos</a>".
+                                        "<a class='btn btn-success' href='imprimirEs.php?id={$row['id']}' role='button'><i class='fa fa-printer'></i> Imprimir pagos</a>".
                                         "<a class='btn btn-danger confirma-eliminar' href='eliminarEs.php?id={$row['id']}' role='button'><i class='fa fa-times'></i> Eliminar</a>".
                                     '</td>'.PHP_EOL;
                                     echo "</tr>".PHP_EOL;

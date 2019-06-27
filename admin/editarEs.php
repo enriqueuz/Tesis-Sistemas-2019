@@ -119,12 +119,12 @@ $conexion=mysqli_connect("localhost","root","12345678","ppd");
 
             if( isset($_POST['cedula']) && !empty($_POST['cedula']) ) {
 		    	$cedulaPrueba = $_POST['cedula'];
-		    	$sql="SELECT * from estudiantes
+		    	$sql = "SELECT * from estudiantes
 				WHERE id != '$id_estudiante' AND cedula='$cedulaPrueba'";
-				$result=mysqli_query($conexion,$sql);
+				$result = mysqli_query($conexion,$sql);
 				if(mysqli_num_rows($result) > 0){
 					$cedulaRepetida = 1;
-				}else{
+				} else {
 					$cedula = $_POST['cedula'];
 				}
             } else {
@@ -168,8 +168,8 @@ $conexion=mysqli_connect("localhost","root","12345678","ppd");
             }
 
             if ($cedulaRepetida==1) {
-		header("location: editarEs.php?editar=1&cedulaRep=1&id=".$id_estudiante);
-			}else{
+		        header("location: editarEs.php?editar=1&cedulaRep=1&id=".$id_estudiante);
+			} else {
 	            if(empty($error_msgs)) {
 
 	                $sql = "UPDATE estudiantes SET id_carrera=:id_carrera, cedula=:cedula, nombre=:nombre, apellido=:apellido, sexo=:sexo, telefono=:telefono, correo=:correo, fecha_nacimiento=:fecha_nacimiento
